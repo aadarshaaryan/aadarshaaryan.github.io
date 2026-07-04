@@ -1,0 +1,79 @@
+{% extends "base/base.html" %}
+
+{% block title %}Home | Aadarsh Aaryan{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-container">
+        <div class="hero-content">
+            <h1 class="hero-title">Software Developer<br><span class="highlight">Aadarsh Aaryan</span></h1>
+            <p class="hero-subtitle">
+                Full-Stack Software Developer building scalable software, AI-powered solutions, and developer
+                communities.
+            </p>
+            <div class="hero-cta-group">
+                <a href="{{ url_for('auth.signup') }}" class="btn btn-primary">Sign up</a>
+                <a href="{{ url_for('main.hackathons') }}" class="btn btn-secondary">Join A Hackathon</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="explore" class="hub-section">
+
+    <div class="hub-grid">
+
+        
+        <a href="#portfolio" class="portal-card">
+            <div class="portal-card-header">
+                <h3 class="portal-title">Portfolio</h3>
+            </div>
+            <p class="portal-desc">A deep dive into my software architecture deployments, full-stack builds, and
+                technology stack parameters.</p>
+            <div class="portal-action">Access Directory &rarr;</div>
+        </a>
+
+        
+        <a href="#afflux" class="portal-card">
+            <div class="portal-card-header">
+                <h3 class="portal-title">Afflux</h3>
+                <span class="live-badge">Platform</span>
+            </div>
+            <p class="portal-desc">Explore the central digital development workspace, custom ecosystems, and core
+                internal applications.</p>
+            <div class="portal-action">Initialize Core &rarr;</div>
+        </a>
+
+        
+        <a href="#blog" class="portal-card">
+            <div class="portal-card-header">
+                <h3 class="portal-title">Tech Blog</h3>
+            </div>
+            <p class="portal-desc">Simplified developer updates, step-by-step systems code reviews, and insights on
+                training frontier engineering models.</p>
+            <div class="portal-action">Read Articles &rarr;</div>
+        </a>
+
+        
+        <a href="#hackathons" class="portal-card">
+            <div class="portal-card-header">
+                <h3 class="portal-title">Hackathons</h3>
+                <span class="live-badge"
+                    style="background: rgba(56,189,248,0.1); color: var(--accent-blue);">Active</span>
+            </div>
+            <p class="portal-desc">Track developer challenge timelines, collaborative builder groups, and open
+                competitive open-source project submissions.</p>
+            <div class="portal-action">View Timelines &rarr;</div>
+        </a>
+
+    </div>
+</section>
+
+{% endblock %}

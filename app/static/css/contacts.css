@@ -1,0 +1,106 @@
+
+.contact-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+}
+
+.contact-header {
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    padding-bottom: 2rem;
+    margin-bottom: 3.5rem;
+}
+
+.contact-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+}
+
+.contact-title .highlight {
+    color: var(--accent-blue);
+}
+
+.contact-subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+
+.social-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+
+.social-card {
+    background-color: #1E262F;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.social-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
+}
+
+
+.social-card.github:hover { border-color: #6e5494; }
+.social-card.linkedin:hover { border-color: #0077b5; }
+.social-card.instagram:hover { border-color: #e1306c; }
+.social-card.whatsapp:hover { border-color: #25d366; }
+
+.social-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.social-handle {
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: var(--accent-blue);
+}
+
+.social-desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+    margin-top: 0.5rem;
+}
+
+
+.social-action {
+    margin-top: auto;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+.social-card:hover .social-action {
+    color: var(--text-primary);
+}
+
+
+@media (max-width: 480px) {
+    .contact-section {
+        padding: 3rem 1rem;
+    }
+    .contact-title {
+        font-size: 2rem;
+    }
+    .social-links-grid {
+        grid-template-columns: 1fr;
+    }
+}

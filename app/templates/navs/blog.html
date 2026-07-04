@@ -1,0 +1,19 @@
+{% extends "base/base.html" %}
+
+{% block title %}Home | Aadarsh Aaryan{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="box">
+    No blogs yet — check back soon!
+    <div class="CTA">
+        <a href="{{ url_for('main.portfolio') }}">
+            <div class="cta-btn">Explore Portfolio</div>
+        </a>
+        <div class="cta-btn">Explore Afflux</div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,238 @@
+/* =========================================================================
+     HACKATHON PIPELINE CORE CSS SCHEMA
+     ========================================================================= */
+
+:root {
+    --bg-workspace: #12181F;
+    --bg-card-element: #1E262F;
+    --text-pure: #FFFFFF;
+    --text-dim: #A0AEC0;
+    --neon-blue: #38BDF8;
+    --glow-matrix: rgba(56, 189, 248, 0.12);
+    --border-alpha: rgba(255, 255, 255, 0.05);
+    --font-mono: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* Base Wrapper Matrix Layout */
+.hackathon-workspace {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+    position: relative;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-workspace);
+}
+
+.hackathon-workspace *,
+.hackathon-workspace *::before,
+.hackathon-workspace *::after {
+    box-sizing: border-box;
+}
+
+/* =========================================================================
+     1. HERO HEADER WITH LEFT-ALIGNED FLEX ARCHITECTURE
+     ========================================================================= */
+.hackathon-hero {
+    display: flex;         
+    flex-direction: column;
+    align-items: flex-start; 
+    text-align: left;        
+    margin-bottom: 3.5rem;
+    padding-top: 2rem;       
+    width: 100%;
+    height: auto;           /* Ensures height expands dynamically with text content */
+    background: transparent; /* Drops any accidental background fills */
+    overflow: visible;      /* Prevents any clipping of massive headers */
+}
+
+.status-stream-badge {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--neon-blue);
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    padding: 0;
+}
+
+.hackathon-main-title {
+    font-size: 3.5rem;       
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin: 0 0 1.25rem 0;
+    color: var(--text-pure);
+    width: 100%;
+}
+
+.hackathon-main-title .gradient-text {
+    background: linear-gradient(135deg, #38BDF8 0%, #0EA5E9 50%, #2563EB 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hackathon-hero-subtitle {
+    font-size: 1.15rem;      
+    color: var(--text-dim);
+    max-width: 720px;        
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* =========================================================================
+     2. MANIFESTO BANNER WITH SOFT GLOW PATTERNS
+     ========================================================================= */
+.manifesto-banner {
+    margin-bottom: 5rem;
+    width: 100%;
+}
+
+.manifesto-inner {
+    background: linear-gradient(90deg, rgba(56, 189, 248, 0.04), transparent);
+    border-left: 3px solid var(--neon-blue);
+    padding: 2.5rem;
+    border-radius: 0 12px 12px 0;
+    box-shadow: inset 10px 0 30px rgba(56, 189, 248, 0.02);
+}
+
+.manifesto-quote {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-pure);
+    margin: 0;
+    text-shadow: 0 0 40px var(--glow-matrix);
+}
+
+/* =========================================================================
+     3. SYSTEM RUNTIME CARD STRUCTS
+     ========================================================================= */
+.sprint-matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+    width: 100%;
+}
+
+.sprint-node-card {
+    background-color: var(--bg-card-element);
+    border: 1px solid var(--border-alpha);
+    border-radius: 12px;
+    padding: 2.25rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sprint-node-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(56, 189, 248, 0.25);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.03);
+}
+
+.sprint-node-card.placeholder-node {
+    border-style: dashed;
+    background-color: rgba(30, 38, 47, 0.4);
+}
+
+.sprint-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sprint-timestamp {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.35);
+    font-weight: 600;
+}
+
+.sprint-status-pill {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.sprint-status-pill.stable {
+    background: rgba(74, 222, 128, 0.06);
+    color: #4ADE80;
+    border: 1px solid rgba(74, 222, 128, 0.15);
+}
+
+.sprint-status-pill.queue {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-dim);
+    border: 1px solid var(--border-alpha);
+}
+
+.sprint-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sprint-card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-pure);
+    margin: 0;
+}
+
+.sprint-track-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--neon-blue);
+    display: block;
+}
+
+.sprint-card-desc {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+}
+
+/* =========================================================================
+     4. DYNAMIC RESPONSIVE ESCALATION BREAKPOINTS
+     ========================================================================= */
+@media (max-width: 768px) {
+    .hackathon-workspace {
+        padding: 4rem 1.5rem;
+    }
+
+    .hackathon-main-title {
+        font-size: 3rem;
+    }
+
+    .manifesto-banner {
+        margin-bottom: 3.5rem;
+    }
+
+    .manifesto-inner {
+        padding: 1.75rem;
+    }
+
+    .manifesto-quote {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hackathon-main-title {
+        font-size: 2.25rem;
+    }
+
+    .sprint-matrix-grid {
+        grid-template-columns: 1fr;
+    }
+}

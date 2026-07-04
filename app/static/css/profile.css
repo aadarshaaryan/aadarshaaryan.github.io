@@ -1,0 +1,227 @@
+/* =========================================================================
+     PROFESSIONAL USER DASHBOARD STYLE SHEET
+     ========================================================================= */
+
+:root {
+    --bg-page: #12181F;
+    --bg-surface: #1E262F;
+    --text-main: #FFFFFF;
+    --text-muted: #A0AEC0;
+    --brand-accent: #38BDF8;
+    --border-line: rgba(255, 255, 255, 0.05);
+}
+
+.user-dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.user-dashboard-container *,
+.user-dashboard-container *::before,
+.user-dashboard-container *::after {
+    box-sizing: border-box;
+}
+
+/* Header Area - Hardened against style inheritance leaks */
+.dashboard-user-header {
+    border-bottom: 1px solid var(--border-line);
+    padding-bottom: 2rem;
+    margin-bottom: 3.5rem;
+    display: block;
+    height: auto;
+    background: transparent;
+    overflow: visible;
+}
+
+.user-display-name {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+}
+
+.user-account-sub {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Grid Framework Setup */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+/* Panel Structure */
+.dashboard-panel {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-line);
+    border-radius: 12px;
+    padding: 2rem;
+}
+
+.panel-header {
+    margin-bottom: 2rem;
+}
+
+.panel-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0 0 0.35rem 0;
+}
+
+.panel-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* --- CERTIFICATE DISPLAY ENGINE --- */
+.certificate-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.certificate-card {
+    background-color: rgba(18, 24, 31, 0.4);
+    border: 1px solid var(--border-line);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    transition: border-color 0.2s ease;
+}
+
+.certificate-card:hover {
+    border-color: rgba(56, 189, 248, 0.3);
+}
+
+.cert-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cert-details {
+    flex-grow: 1;
+}
+
+.cert-name {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin: 0 0 0.25rem 0;
+}
+
+.cert-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.btn-download-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--brand-accent);
+    text-decoration: none;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    padding: 0.5rem 0.85rem;
+    border-radius: 6px;
+    background: rgba(56, 189, 248, 0.02);
+    transition: all 0.2s ease;
+}
+
+.btn-download-link:hover {
+    background: var(--brand-accent);
+    color: #12181F;
+}
+
+/* --- BADGES LAYOUT ARCHITECTURE --- */
+.badges-flex-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.badge-item-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    width: 80px;
+}
+
+.badge-graphic-shield {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    border: 2px solid transparent;
+}
+
+.badge-graphic-shield.elite {
+    background: rgba(56, 189, 248, 0.08);
+    border-color: var(--brand-accent);
+    color: var(--brand-accent);
+}
+
+.badge-graphic-shield.stable {
+    background: rgba(74, 222, 128, 0.08);
+    border-color: #4ADE80;
+    color: #4ADE80;
+}
+
+.badge-graphic-shield.gray {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: var(--border-line);
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.badge-item-node.locked {
+    opacity: 0.5;
+}
+
+.badge-label-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-main);
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* =========================================================================
+     RESPONSIVE INTERACTIVE MEDIA QUERIES
+     ========================================================================= */
+@media (max-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .certificate-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .btn-download-link {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+}

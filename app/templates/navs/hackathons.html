@@ -1,0 +1,71 @@
+{% extends "base/base.html" %}
+
+{% block title %}Venture Sprints{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hackathons.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="hackathon-workspace">
+    
+    <!-- =========================================================================
+         1. CONSOLE HERO HEADER SECTION (Swapped header for section to drop global styles)
+         ========================================================================= -->
+    <section class="hackathon-hero">
+        <div class="status-stream-badge">// ENGINE_R&D_PIPELINE_ENGAGED</div>
+        <h1 class="hackathon-main-title">Venture <span class="gradient-text">Sprints</span></h1>
+        <p class="hackathon-hero-subtitle">
+            An index of high-velocity, time-constrained engineering builds designed to solve targeted friction points, secure non-dilutive capital, and validate core software logic.
+        </p>
+    </section>
+
+    <!-- =========================================================================
+         2. CORE ENGINEERING MANIFESTO
+         ========================================================================= -->
+    <section class="manifesto-banner">
+        <div class="manifesto-inner">
+            <p class="manifesto-quote">"Ideas into Impact. Code with Purpose."</p>
+        </div>
+    </section>
+
+    <!-- =========================================================================
+         3. SPRINT MATRIX GRID
+         ========================================================================= -->
+    <main class="sprint-matrix-grid">
+        
+        <!-- Sprint Node 01: Initial Prototype Sandbox -->
+        <article class="sprint-node-card">
+            <div class="sprint-card-header">
+                <span class="sprint-timestamp">PHASE_01 // METRIC_WIN</span>
+                <span class="sprint-status-pill stable">● COMPILED</span>
+            </div>
+            <div class="sprint-card-body">
+                <h3 class="sprint-card-title">Afflux MVP Core</h3>
+                <span class="sprint-track-label">[ Track: Scalable Commerce Systems ]</span>
+                <p class="sprint-card-desc">
+                    Engineered during a high-intensity software development sprint to test relational database layouts and session verification algorithms for localized business frameworks.
+                </p>
+            </div>
+        </article>
+
+        <!-- Template Placeholder Sprint Card -->
+        <article class="sprint-node-card placeholder-node">
+            <div class="sprint-card-header">
+                <span class="sprint-timestamp">PHASE_02 // SYSTEM_SCAN</span>
+                <span class="sprint-status-pill queue">_ NEXT_SPRINT</span>
+            </div>
+            <div class="sprint-card-body">
+                <h3 class="sprint-card-title">Awaiting Next Prompt...</h3>
+                <span class="sprint-track-label">[ Allocation Block Available ]</span>
+                <p class="sprint-card-desc">
+                    Ready to scale, code under pressure, and process complex system problems into functional software products during upcoming competition tracks.
+                </p>
+            </div>
+        </article>
+
+    </main>
+
+</div>
+{% endblock %}

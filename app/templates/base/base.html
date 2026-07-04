@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Aadarsh Aaryan | Full-Stack Software Developer{% endblock %}</title>
+    <meta name="description"
+        content="Full-Stack Software Developer building scalable software, AI-powered solutions, and developer communities.">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notify.css') }}">
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <div id="mobile-menu" class="mobile-menu">
+        <a href="{{ url_for('main.portfolio') }}">Portfolio</a>
+        <a href="{{ url_for('main.afflux') }}">Afflux</a>
+        <a href="{{ url_for('main.blog') }}">Blog</a>
+        <a href="{{ url_for('main.hackathons') }}">Hackathons</a>
+        <a href="{{ url_for('main.contacts') }}">Contact</a>
+    </div>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="{{ url_for('main.home') }}">
+                        <div class="logo_w">
+                            <img src="{{ url_for('static', filename='images/afflux_logo.png') }}" alt="logo">
+                        </div>
+                    </a>
+                </li>
+                <li><a href="{{ url_for('main.home') }}">Home</a></li>
+
+
+                <li class="desktop_nav"><a href="{{ url_for('main.portfolio') }}">Portfolio</a></li>
+                <li class="desktop_nav"><a href="{{ url_for('main.afflux') }}">Afflux</a></li>
+                <li class="desktop_nav"><a href="{{ url_for('main.blog') }}">Blog</a></li>
+                <li class="desktop_nav"><a href="{{ url_for('main.hackathons') }}">Hackathons</a></li>
+                <li class="desktop_nav"><a href="{{ url_for('main.contacts') }}">Contact</a></li>
+
+                {% if session.get('user_id') %}
+                <li><a href="{{ url_for('profile.profile') }}">Your Profile</a></li>
+                {% else %}
+                <li><a href="{{ url_for('auth.signup') }}">Sign up</a></li>
+                {% endif %}
+
+
+                <li class="mobile_nav">
+                    <a href="#" id="mobile-toggle">More ▾</a>
+                </li>
+            </ul>
+
+
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="terminal-footer">
+        <div class="footer-wrapper">
+
+
+            <div class="footer-upper">
+                <div class="footer-brand-node">
+                    <div class="footer-status-indicator">
+                        <div class="pulse-dot"></div>
+                        <span>SYSTEMS ACTIVE // 2026</span>
+                    </div>
+                    <p class="footer-tagline">
+                        Building robust full-stack software nodes, AI execution systems, and highly collaborative
+                        open-source community layers.
+                    </p>
+                </div>
+
+                <div class="footer-links-group">
+
+                    <div>
+                        <h4 class="footer-column-title">// Network Links</h4>
+                        <ul class="footer-comms-list"
+                            style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start;">
+                            <li><a href="https://www.linkedin.com/in/aadarsh-kumar-329308415/" target="_blank"
+                                    rel="noopener">GitHub</a></li>
+                            <li><a href="https://instagram.com/aadarshaaryan.official" target="_blank"
+                                    rel="noopener">LinkedIn</a></li>
+                            <li><a href="https://wa.me/9473494484">Whatshapp</a></li>
+                        </ul>
+                    </div>
+
+
+                    <div>
+                        <h4 class="footer-column-title">// Navigation</h4>
+                        <ul class="footer-comms-list"
+                            style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start;">
+                            <li><a href="{{ url_for('main.afflux') }}">Afflux</a></li>
+                            <li><a href="{{ url_for('auth.signup') }}">Sign up</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="footer-lower">
+                <div class="footer-copyright">
+                    &copy; 2026 AADARSH AARYAN. ALL RIGHTS RESERVED. RUNNING STABLE_V2.4
+                </div>
+                <div class="footer-legal-nodes">
+                    <a href="#">/PRIVACY_POLICY</a>
+                    <a href="#">/TERMS_OF_SERVICE</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <div class="msg_wrapper">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for msg in messages %}
+        <div id="notify" class="notify">
+            <p>{{ msg }}</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <script src="{{ url_for('static', filename='js/notify.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+</body>
+
+</html>

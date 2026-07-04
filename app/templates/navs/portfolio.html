@@ -1,0 +1,405 @@
+{% extends "base/base.html" %}
+
+{% block title %}Directory | Aadarsh Aaryan{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/portfolio.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- =========================================================================
+     1. HERO / HEADER SECTION
+     ========================================================================= -->
+<section class="portfolio-hero">
+    <div class="terminal-badge">// SOURCE_DIRECTORY_INITIALIZED</div>
+    <h1 class="portfolio-main-title">Project <span class="highlight">Directory</span></h1>
+    <p class="portfolio-hero-subtitle">
+        A structured index of full-stack applications, software concepts, and technical experiments built to solve
+        practical problems while learning core system engineering.
+    </p>
+</section>
+
+<!-- =========================================================================
+     2. METRIC STATISTICS DASHBOARD
+     ========================================================================= -->
+<section class="portfolio-stats-grid">
+    <div class="stat-card">
+        <span class="stat-value">04</span>
+        <span class="stat-label">// PROJECTS_BUILT</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-value">12+</span>
+        <span class="stat-label">// TECHNOLOGIES_LEARNED</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-value">1+ Yrs</span>
+        <span class="stat-label">// YEARS_OF_LEARNING</span>
+    </div>
+    <div class="stat-card">
+        <span class="stat-value">AI & ML</span>
+        <span class="stat-label">// CURRENT_LEARNING_FOCUS</span>
+    </div>
+</section>
+
+<!-- =========================================================================
+     3. FEATURED PROJECTS (Startups & Complete Systems)
+     ========================================================================= -->
+<section class="portfolio-section">
+    <div class="section-header">
+        <h2 class="section-title">Core <span class="highlight">Projects</span></h2>
+        <p class="section-subtitle">Multi-tier web applications and digital platforms built to explore backend logic and
+            user workflows.</p>
+    </div>
+
+    <div class="featured-matrix">
+
+        
+        <article class="featured-system-card">
+            <div class="system-visual-placeholder">
+                <span class="matrix-code-overlay">[ AFFLUX_PROTOTYPE ]</span>
+            </div>
+            <div class="system-content">
+                <div class="system-header">
+                    <h3 class="system-title">Afflux</h3>
+                    <span class="status-indicator live">● ACTIVE_PROJECT</span>
+                </div>
+                <p class="system-description">
+                    A business networking platform where users can create business profiles, showcase products and
+                    services, post operational needs or opportunities, connect with other professionals, and grow their
+                    businesses through active networking.
+                </p>
+                <div class="tech-matrix">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Flask</span>
+                    <span class="tech-tag">SQLite</span>
+                    <span class="tech-tag">REST APIs</span>
+                    <span class="tech-tag">Session Auth</span>
+                </div>
+                <div class="system-actions">
+                    <a href="#" class="action-btn primary" target="_blank">Live Demo &rarr;</a>
+                    <a href="#" class="action-btn secondary" target="_blank">GitHub</a>
+                    <a href="#" class="action-btn secondary">Details</a>
+                </div>
+            </div>
+        </article>
+
+        
+        <article class="featured-system-card">
+            <div class="system-visual-placeholder">
+                <span class="matrix-code-overlay">[ LOCALLIFT_PROTOTYPE ]</span>
+            </div>
+            <div class="system-content">
+                <div class="system-header">
+                    <h3 class="system-title">LocalLift Systems</h3>
+                    <span class="status-indicator live">● ACTIVE_PROJECT</span>
+                </div>
+                <p class="system-description">
+                    A platform focused on helping local businesses establish a digital presence through websites,
+                    branding, business profiles, and communication tools, designed with the long-term goal of evolving
+                    into a scalable SaaS platform.
+                </p>
+                <div class="tech-matrix">
+                    <span class="tech-tag">HTML5 / CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">DOM Manipulation</span>
+                    <span class="tech-tag">Database Design</span>
+                </div>
+                <div class="system-actions">
+                    <a href="#" class="action-btn primary" target="_blank">Live Demo &rarr;</a>
+                    <a href="#" class="action-btn secondary" target="_blank">GitHub</a>
+                    <a href="#" class="action-btn secondary">Details</a>
+                </div>
+            </div>
+        </article>
+
+        
+        <article class="featured-system-card">
+            <div class="system-visual-placeholder">
+                <span class="matrix-code-overlay">[ BUILDSPHERE_CONCEPT ]</span>
+            </div>
+            <div class="system-content">
+                <div class="system-header">
+                    <h3 class="system-title">BuildSphere</h3>
+                    <span class="status-indicator staging">◒ IN_DEVELOPMENT</span>
+                </div>
+                <p class="system-description">
+                    A future platform engineered for developers, founders, students, and creators to document their
+                    build progress, showcase personal projects in public, share learning milestones, collaborate, and
+                    grow together.
+                </p>
+                <div class="tech-matrix">
+                    <span class="tech-tag">Python (Flask)</span>
+                    <span class="tech-tag">Password Hashing</span>
+                    <span class="tech-tag">SQLite</span>
+                    <span class="tech-tag">File Uploads</span>
+                </div>
+                <div class="system-actions">
+                    <a href="#" class="action-btn primary" target="_blank">Live Demo &rarr;</a>
+                    <a href="#" class="action-btn secondary" target="_blank">GitHub</a>
+                    <a href="#" class="action-btn secondary">Details</a>
+                </div>
+            </div>
+        </article>
+
+        
+        <article class="featured-system-card">
+            <div class="system-visual-placeholder">
+                <span class="matrix-code-overlay">[ CODELAB_PIPELINE ]</span>
+            </div>
+            <div class="system-content">
+                <div class="system-header">
+                    <h3 class="system-title">CodeLab</h3>
+                    <span class="status-indicator pipeline">◓ UNDER_CONSTRUCTION</span>
+                </div>
+                <p class="system-description">
+                    An interactive coding platform designed to teach programming through structured lessons, coding
+                    challenges, browser-based code execution, and gamification, with future expansion into multiple
+                    programming languages.
+                </p>
+                <div class="tech-matrix">
+                    <span class="tech-tag">Python Core</span>
+                    <span class="tech-tag">C Language</span>
+                    <span class="tech-tag">JSON Handling</span>
+                    <span class="tech-tag">Frontend Logic</span>
+                </div>
+                <div class="system-actions">
+                    <button class="action-btn primary" disabled>Building Project...</button>
+                    <a href="#" class="action-btn secondary" target="_blank">GitHub</a>
+                    <a href="#" class="action-btn secondary">Details</a>
+                </div>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<!-- =========================================================================
+     4. OTHER UTILITY & COMPONENT PROJECTS
+     ========================================================================= -->
+<section class="portfolio-section">
+    <div class="section-header">
+        <h2 class="section-title">Utility & <span class="highlight">Components</span></h2>
+        <p class="section-subtitle">Smaller standalone utilities, specialized tools, and performance tracking
+            configurations.</p>
+    </div>
+
+    <div class="utility-grid">
+
+        
+        <div class="utility-card">
+            <div class="utility-header">
+                <h4 class="utility-title">Educatum Platform</h4>
+                <span class="utility-tag">Learning Project</span>
+            </div>
+            <p class="utility-desc">An educational initiative framework built to share simplified web resources, lecture
+                assets, and instructional developer content.</p>
+            <div class="utility-tech">
+                <span>Python</span> <span>Flask</span> <span>Branding</span>
+            </div>
+            <a href="#" class="utility-link">GitHub Repo &rarr;</a>
+        </div>
+
+        
+        <div class="utility-card">
+            <div class="utility-header">
+                <h4 class="utility-title">ExamHub Engine</h4>
+                <span class="utility-tag">Learning Project</span>
+            </div>
+            <p class="utility-desc">An online mock test page featuring simple user session handling, score capture, and
+                initial Google Search Console indexing tests.</p>
+            <div class="utility-tech">
+                <span>JavaScript</span> <span>SQLite</span> <span>Web Design</span>
+            </div>
+            <a href="#" class="utility-link">GitHub Repo &rarr;</a>
+        </div>
+
+        
+        <div class="utility-card">
+            <div class="utility-header">
+                <h4 class="utility-title">File Converter Utility</h4>
+                <span class="utility-tag">Learning Project</span>
+            </div>
+            <p class="utility-desc">A native Python-based utility script engineered to process basic local file
+                manipulation, formatting, and secure extensions handling.</p>
+            <div class="utility-tech">
+                <span>Python</span> <span>File I/O</span> <span>Scripting</span>
+            </div>
+            <a href="#" class="utility-link">GitHub Repo &rarr;</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- =========================================================================
+     5. TECHNOLOGY MATRIX & CORE SKILLS
+     ========================================================================= -->
+<section class="portfolio-section">
+    <div class="section-header">
+        <h2 class="section-title">Technical <span class="highlight">Capabilities</span></h2>
+        <p class="section-subtitle">Programming languages, web frameworks, and computer science concepts I currently use
+            or am actively studying.</p>
+    </div>
+
+    <div class="skills-matrix-grid">
+
+        
+        <div class="skills-category-box">
+            <h4 class="category-title">// AI & MACHINE_LEARNING</h4>
+            <ul class="skills-list">
+                <li>Python for AI Processing</li>
+                <li class="learning-node">Learning Machine Learning Fundamentals</li>
+                <li class="learning-node">Learning Deep Learning Architectures</li>
+                <li class="target-node">Interest: Chatbots, Image Generation & Analysis</li>
+            </ul>
+        </div>
+
+        
+        <div class="skills-category-box">
+            <h4 class="category-title">// BACKEND_DEVELOPMENT</h4>
+            <ul class="skills-list">
+                <li>Flask Framework Development</li>
+                <li>REST API Construction & JSON</li>
+                <li>Authentication & Session Management</li>
+                <li>Secure Password Hashing (Werkzeug)</li>
+                <li>File Upload and Buffer Handling</li>
+            </ul>
+        </div>
+
+        
+        <div class="skills-category-box">
+            <h4 class="category-title">// FRONTEND_DEVELOPMENT</h4>
+            <ul class="skills-list">
+                <li>Semantic HTML5 & Structural CSS3</li>
+                <li>Native JavaScript (ES6+ Layout Logic)</li>
+                <li>DOM Manipulation & Event Handling</li>
+                <li>Responsive Web Design & Grid Systems</li>
+            </ul>
+        </div>
+
+        
+        <div class="skills-category-box">
+            <h4 class="category-title">// DATABASES & TOOLS</h4>
+            <ul class="skills-list">
+                <li>SQLite Integration & CRUD Operations</li>
+                <li>Relational Database Design</li>
+                <li>Git & GitHub Version Tracking</li>
+                <li>VS Code Environment Optimization</li>
+                <li>Linux Command Line Basics</li>
+            </ul>
+        </div>
+
+        
+        <div class="skills-category-box">
+            <h4 class="category-title">// CONCEPTS_UNDERSTOOD</h4>
+            <ul class="skills-list">
+                <li>Object-Oriented Programming (OOP)</li>
+                <li>Inheritance, Polymorphism & Encapsulation</li>
+                <li class="learning-node">Learning Data Structures & Algorithms</li>
+                <li class="learning-node">Learning Basic System Design Principles</li>
+            </ul>
+        </div>
+
+        
+        <div class="skills-category-box">
+            <h4 class="category-title">// ANDROID_DEVELOPMENT</h4>
+            <ul class="skills-list">
+                <li class="learning-node">Learning Kotlin Programming</li>
+                <li>Android Studio IDE Operations</li>
+                <li class="learning-node">Learning Modern Android Architecture</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<!-- =========================================================================
+     6. DEVELOPMENT PHILOSOPHY
+     ========================================================================= -->
+<section class="portfolio-section philosophy-wrapper">
+    <div class="philosophy-container">
+        <h3 class="philosophy-title">// DEVELOPMENT_PHILOSOPHY</h3>
+        <p class="philosophy-body">
+            I believe in understanding how technologies work internally rather than just using libraries without
+            context. My goal is to focus on solving real-world problems, writing maintainable code, continuously
+            learning, and designing complete software systems that can scale effectively over time.
+        </p>
+    </div>
+</section>
+
+<!-- =========================================================================
+     7. SYSTEM TIMELINE / DEVELOPMENT JOURNEY
+     ========================================================================= -->
+<section class="portfolio-section">
+    <div class="section-header">
+        <h2 class="section-title">Learning <span class="highlight">Timeline</span></h2>
+        <p class="section-subtitle">The progression tracking my journey from writing basic scripts to building
+            full-stack applications.</p>
+    </div>
+
+    <div class="timeline-container">
+
+        
+        <div class="timeline-node">
+            <div class="timeline-meta">PHASE_01 // FOUNDATIONS</div>
+            <div class="timeline-content">
+                <h4 class="timeline-heading">Programming Fundamentals</h4>
+                <p class="timeline-desc">Started by mastering core programming concepts in C and Python. Explored
+                    Object-Oriented Programming concepts like inheritance, encapsulation, and polymorphism to write
+                    cleaner, structured scripts.</p>
+            </div>
+        </div>
+
+        
+        <div class="timeline-node">
+            <div class="timeline-meta">PHASE_02 // FULL_STACK</div>
+            <div class="timeline-content">
+                <h4 class="timeline-heading">Full-Stack Implementation</h4>
+                <p class="timeline-desc">Expanded into backend development using Flask and SQLite databases. Learned to
+                    manage user state using secure session hashing, handle file data uploads, and manipulate frontends
+                    dynamically with native JavaScript.</p>
+            </div>
+        </div>
+
+        
+        <div class="timeline-node">
+            <div class="timeline-meta">PHASE_03 // SYSTEMS</div>
+            <div class="timeline-content">
+                <h4 class="timeline-heading">Building Complete Systems</h4>
+                <p class="timeline-desc">Began system mapping and writing initial logic blocks for larger,
+                    self-initiated projects like Afflux, LocalLift Systems, and BuildSphere to test database schemas and
+                    user workflows.</p>
+            </div>
+        </div>
+
+        
+        <div class="timeline-node">
+            <div class="timeline-meta">PHASE_04 // LONG_TERM_VISION</div>
+            <div class="timeline-content">
+                <h4 class="timeline-heading">AI-Powered Systems & Startups</h4>
+                <p class="timeline-desc">Actively working toward implementing machine learning, deep learning models,
+                    and modern mobile software architectures to transition these platforms into functional, independent
+                    startups.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- =========================================================================
+     8. CALL TO ACTION (CTA)
+     ========================================================================= -->
+<section class="portfolio-cta">
+    <div class="cta-inner">
+        <h2 class="cta-title">Let's <span class="highlight">Collaborate</span></h2>
+        <p class="cta-desc">
+            Whether you are exploring code repos, reviewing system logic, or looking to collaborate on software builds
+            and technical projects, feel free to reach out.
+        </p>
+        <div class="cta-actions">
+            <a href="{{ url_for('main.contacts') }}" class="btn btn-primary">Contact Directory &rarr;</a>
+            <a href="https://github.com" target="_blank" rel="noopener" class="btn btn-secondary">Audit Source Git</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

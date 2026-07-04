@@ -1,0 +1,89 @@
+{% extends "base/base.html" %}
+
+{% block title %}User Dashboard | Certificates & Badges{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=1.3">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}?v=1.3">
+{% endblock %}
+
+{% block content %}
+<div class="user-dashboard-container">
+
+    <!-- User Overview Header (Isolated using section) -->
+    <section class="dashboard-user-header">
+        <div class="user-profile-meta">
+            <h1 class="user-display-name">Welcome back, {{ current_user.name if current_user else "Developer" }}</h1>
+            <p class="user-account-sub">Manage your earned industry credentials, verified certificates, and achievement tracking marks.</p>
+        </div>
+    </section>
+
+    <!-- Main Content Split Matrix -->
+    <main class="dashboard-grid">
+        
+        <!-- SECTION A: VERIFIED CERTIFICATES -->
+        <section class="dashboard-panel">
+            <div class="panel-header">
+                <h2 class="panel-title">Your Verified Certificates</h2>
+                <p class="panel-desc">Official documents confirming your successful completion of specialized technical tracks.</p>
+            </div>
+            
+            <div class="certificate-list">
+                
+                <!-- Certificate Card Item -->
+                <!-- <div class="certificate-card">
+                    <div class="cert-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    </div>
+                    <div class="cert-details">
+                        <h3 class="cert-name">Afflux MVP Core Engineering</h3>
+                        <p class="cert-meta">Issued: July 2026 • ID: CERT-AFF-8492</p>
+                    </div>
+                    <div class="cert-action">
+                        <a href="#" class="btn-download-link" download>Download PDF &darr;</a>
+                    </div>
+                </div> -->
+
+            </div>
+        </section>
+
+        <!-- SECTION B: EARNED BADGES -->
+        <section class="dashboard-panel">
+            <div class="panel-header">
+                <h2 class="panel-title">Earned Badges</h2>
+                <p class="panel-desc">Visual milestones highlighting your continuous build activity and technical velocity.</p>
+            </div>
+            
+            <div class="badges-flex-wrapper">
+                
+                <!-- Badge 01 -->
+                <div class="badge-item-node" title="Completed initial setup sprint">
+                    <div class="badge-graphic-shield elite">
+                        <span>★</span>
+                    </div>
+                    <span class="badge-label-text">First Sprint</span>
+                </div>
+
+                <!-- Badge 02 -->
+                <div class="badge-item-node" title="Validated functional web core structure">
+                    <div class="badge-graphic-shield stable">
+                        <span>✔</span>
+                    </div>
+                    <span class="badge-label-text">Core Builder</span>
+                </div>
+
+                <!-- Placeholder Locked Badge -->
+                <div class="badge-item-node locked" title="Locked: Complete upcoming hackathon tracks to unlock">
+                    <div class="badge-graphic-shield gray">
+                        <span>🔒</span>
+                    </div>
+                    <span class="badge-label-text">Next Track</span>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+</div>
+{% endblock %}

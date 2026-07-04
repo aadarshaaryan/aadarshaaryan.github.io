@@ -1,0 +1,56 @@
+.msg_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.notify {
+    position: fixed;
+    top: 5px;
+    box-shadow: 2.5px 2.5px 5px rgba(255, 255, 255, 0.25);
+    background: linear-gradient(135deg, #383838, #12181F, #12181F);
+    min-height: 60px;
+    max-width: 320px;
+    min-width: 320px;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transform: translateY(0);
+    z-index: 2000;
+}
+
+.notify_come {
+    animation: notification_come 0.3s ease-in-out forwards;
+}
+
+.notify_go {
+    animation: notification_go 0.3s ease-in-out forwards;
+}
+
+@keyframes notification_come {
+    from {
+        opacity: 0;
+        transform: translateY(-60px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes notification_go {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-60px);
+    }
+}

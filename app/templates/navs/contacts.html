@@ -1,0 +1,57 @@
+{% extends "base/base.html" %}
+
+{% block title %}Contact Directories | Aadarsh Aaryan{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/contacts.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="contact-section">
+    
+    
+    <div class="contact-header">
+        <h1 class="contact-title">Connection <span class="highlight">Hub</span></h1>
+        <p class="contact-subtitle">Select a digital node below to sync up with my developer streams or start a live text session.</p>
+    </div>
+
+    
+    <div class="social-links-grid">
+        
+        
+        <a href="https://github.com/aadarshaaryan" target="_blank" rel="noopener" class="social-card github">
+            <h3 class="social-name">GitHub</h3>
+            <span class="social-handle">// repositories</span>
+            <p class="social-desc">Review production script logs, open-source projects, and full-stack development code bases.</p>
+            <div class="social-action">Open Profile &rarr;</div>
+        </a>
+
+        
+        <a href="https://www.linkedin.com/in/aadarsh-kumar-329308415/" target="_blank" rel="noopener" class="social-card linkedin">
+            <h3 class="social-name">LinkedIn</h3>
+            <span class="social-handle">// professional</span>
+            <p class="social-desc">Connect for systems development, engineering collaborations, and career opportunities.</p>
+            <div class="social-action">Establish Link &rarr;</div>
+        </a>
+
+        
+        <a href="https://instagram.com/aadarshaaryan.official" target="_blank" rel="noopener" class="social-card instagram">
+            <h3 class="social-name">Instagram</h3>
+            <span class="social-handle">// digital_creator</span>
+            <p class="social-desc">Follow my journey through developer community snapshots, tech designs, and digital content loops.</p>
+            <div class="social-action">Launch App &rarr;</div>
+        </a>
+
+        
+        <a href="https://wa.me/9473494484" target="_blank" rel="noopener" class="social-card whatsapp">
+            <h3 class="social-name">WhatsApp</h3>
+            <span class="social-handle">// live_chat</span>
+            <p class="social-desc">Initiate an instantaneous direct message line for quick project discussions and sync-ups.</p>
+            <div class="social-action">Open Chat &rarr;</div>
+        </a>
+
+    </div>
+
+</div>
+{% endblock %}

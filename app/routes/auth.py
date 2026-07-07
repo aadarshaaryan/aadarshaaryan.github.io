@@ -33,7 +33,7 @@ def signup():
                 cursor.execute("SELECT id FROM users WHERE username = ?", (username,))
                 user_id = cursor.fetchone()[0]
 
-            # Instantly authenticate user session automatically
+            
             session["user_id"] = user_id
             session["username"] = username
 

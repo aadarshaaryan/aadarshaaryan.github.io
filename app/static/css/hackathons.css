@@ -13,7 +13,12 @@
     --font-mono: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
 }
 
-/* Base Wrapper Matrix Layout */
+a{
+    color: inherit;
+    text-decoration: none;
+}
+
+
 .hackathon-workspace {
     max-width: 1280px;
     margin: 0 auto;
@@ -41,9 +46,9 @@
     margin-bottom: 3.5rem;
     padding-top: 2rem;       
     width: 100%;
-    height: auto;           /* Ensures height expands dynamically with text content */
-    background: transparent; /* Drops any accidental background fills */
-    overflow: visible;      /* Prevents any clipping of massive headers */
+    height: auto;           
+    background: transparent; 
+    overflow: visible;      
 }
 
 .status-stream-badge {
@@ -117,14 +122,15 @@
 }
 
 .sprint-node-card {
-    background-color: var(--bg-card-element);
-    border: 1px solid var(--border-alpha);
+    box-shadow: 2.5px 2.5px 5px #38BDF8;
+    background: linear-gradient(135deg, #38bff83c, #12181F, #12181F);
     border-radius: 12px;
     padding: 2.25rem 2rem;
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
 }
 
 .sprint-node-card:hover {

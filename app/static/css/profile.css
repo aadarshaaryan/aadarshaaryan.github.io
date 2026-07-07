@@ -25,7 +25,7 @@
     box-sizing: border-box;
 }
 
-/* Header Area - Hardened against style inheritance leaks */
+
 .dashboard-user-header {
     border-bottom: 1px solid var(--border-line);
     padding-bottom: 2rem;
@@ -50,7 +50,7 @@
     margin: 0;
 }
 
-/* Grid Framework Setup */
+
 .dashboard-grid {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
@@ -58,7 +58,7 @@
     align-items: start;
 }
 
-/* Panel Structure */
+
 .dashboard-panel {
     background-color: var(--bg-surface);
     border: 1px solid var(--border-line);
@@ -84,7 +84,7 @@
     line-height: 1.4;
 }
 
-/* --- CERTIFICATE DISPLAY ENGINE --- */
+
 .certificate-list {
     display: flex;
     flex-direction: column;
@@ -147,7 +147,7 @@
     color: #12181F;
 }
 
-/* --- BADGES LAYOUT ARCHITECTURE --- */
+
 .badges-flex-wrapper {
     display: flex;
     flex-wrap: wrap;

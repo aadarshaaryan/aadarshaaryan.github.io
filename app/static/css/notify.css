@@ -7,8 +7,14 @@
 .notify {
     position: fixed;
     top: 5px;
-    box-shadow: 2.5px 2.5px 5px rgba(255, 255, 255, 0.25);
-    background: linear-gradient(135deg, #383838, #12181F, #12181F);
+    box-shadow: 2.5px 2.5px 5px #38BDF8;
+    
+    background: linear-gradient(135deg, #38bff83c, #12181F, #12181F); 
+    
+    
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px); 
+
     min-height: 60px;
     max-width: 320px;
     min-width: 320px;

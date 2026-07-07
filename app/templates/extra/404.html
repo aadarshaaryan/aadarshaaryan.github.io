@@ -1,0 +1,42 @@
+{% extends "base/base.html" %}
+{% block title %}Afflux: 404 page not found{% endblock %}
+
+{% block content %}
+<div class="error-container" style="
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    min-height: 70vh; 
+    padding: 20px; 
+    box-sizing: border-box;
+">
+    <div class="box" style="
+        width: 100%; 
+        max-width: 500px; 
+        text-align: center; 
+        margin: 0 auto;
+    ">
+        <h1 style="margin-bottom: 10px;">404 — Page Not Found</h1>
+        <p style="margin-bottom: 20px; color: #64748B;">Oops! The page you’re looking for doesn’t exist.</p>
+        
+        <a href="{{ url_for('main.home') }}" style="
+            color: #38BDF8; 
+            text-decoration: none; 
+            font-weight: 600;
+        ">
+            Go back to Home
+        </a>
+        
+        <img src="{{ url_for('static', filename='images/404.svg') }}" alt="404 Graphic" style="
+            width: 100%; 
+            max-width: 400px; 
+            height: auto; 
+            margin-top: 30px; 
+            display: block; 
+            margin-left: auto; 
+            margin-right: auto;
+        ">
+    </div>
+</div>
+{% endblock %}

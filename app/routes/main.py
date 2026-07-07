@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, redirect, flash, url_for
+from flask import Blueprint, render_template, redirect, flash, url_for, jsonify
 import sqlite3
+from app.services.email_service import send_email
 
 main_bp = Blueprint("main", __name__)
 DB_NAME = "database.db"
@@ -21,10 +22,6 @@ def portfolio():
     flash("I'm currently refining my portfolio to showcase my best work. It'll be available soon.")
     return redirect(url_for('main.home'))
 
-@main_bp.route('/afflux')
-def afflux():
-    return render_template('navs/afflux.html')
-
 @main_bp.route('/hackathons')
 def hackathons():
     return render_template('navs/hackathons.html')
@@ -36,3 +33,17 @@ def show_users():
         cursor.execute("SELECT id, username FROM users")
         rows = cursor.fetchall()
     return render_template("main/users.html", users=rows)
+
+
+@main_bp.route("/test-email")
+def test_email():
+    send_email(
+        "uttamkumar96442@gmail.com",
+        "aaditya harami hai",
+        "aaditya harami hai."
+    )
+    return "Email sent! Aadarsh 🥳"
+
+@main_bp.get("/health")
+def health():
+    return jsonify({"status": "ok"}), 200

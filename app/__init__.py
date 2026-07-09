@@ -33,10 +33,13 @@ def create_app():
     app.config["MAIL_USE_SSL"] = False
     app.config["MAIL_USERNAME"] = os.getenv("MAIL_USERNAME")
     app.config["MAIL_PASSWORD"] = os.getenv("MAIL_PASSWORD")
-    app.config["MAIL_DEFAULT_SENDER"] = (
-        "Afflux",
-        os.getenv("MAIL_USERNAME")
-    )
+    app.config["MAIL_DEFAULT_SENDER"] = f"Afflux <{os.getenv('MAIL_USERNAME')}>"
+    app.config["MAIL_TIMEOUT"] = 10
+
+    print("SERVER:", app.config["MAIL_SERVER"])
+    print("PORT:", app.config["MAIL_PORT"])
+    print("TLS:", app.config["MAIL_USE_TLS"])
+    print("USER:", app.config["MAIL_USERNAME"])
 
     db.init_app(app)
     mail.init_app(app)

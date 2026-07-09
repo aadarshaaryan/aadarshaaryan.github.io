@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from dotenv import load_dotenv
 import os
 
-from app.extensions import db, mail
+from app.extensions import db
 
 load_dotenv()
 
@@ -24,26 +24,10 @@ def create_app():
     # TEMPORARY: show SQL queries in terminal
     app.config["SQLALCHEMY_ECHO"] = True
 
-    # Mail
-    app.config["MAIL_SERVER"] = os.getenv("MAIL_SERVER")
-    app.config["MAIL_PORT"] = int(os.getenv("MAIL_PORT"))
-    app.config["MAIL_USE_TLS"] = (
-        os.getenv("MAIL_USE_TLS") == "True"
-    )
-    app.config["MAIL_USE_SSL"] = False
-    app.config["MAIL_USERNAME"] = os.getenv("MAIL_USERNAME")
-    app.config["MAIL_PASSWORD"] = os.getenv("MAIL_PASSWORD")
-    app.config["MAIL_DEFAULT_SENDER"] = f"Afflux <{os.getenv('MAIL_USERNAME')}>"
-    app.config["MAIL_TIMEOUT"] = 10
-
-    print("SERVER:", app.config["MAIL_SERVER"])
-    print("PORT:", app.config["MAIL_PORT"])
-    print("TLS:", app.config["MAIL_USE_TLS"])
-    print("USER:", app.config["MAIL_USERNAME"])
-
+    # Initialize extensions
     db.init_app(app)
-    mail.init_app(app)
 
+    # Register blueprints
     from app.routes.main import main_bp
     from app.routes.auth import auth_bp
     from app.routes.profile import profile_bp
@@ -53,21 +37,6 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(profile_bp)
     app.register_blueprint(hackathons_bp)
-
-    @app.route("/smtp-test")
-    def smtp_test():
-        import smtplib
-
-        try:
-            s = smtplib.SMTP(
-                "smtp.gmail.com",
-                2587,
-                timeout=10
-            )
-            s.quit()
-            return "Connected!"
-        except Exception as e:
-            return str(e)
 
     @app.errorhandler(404)
     def page_not_found(e):

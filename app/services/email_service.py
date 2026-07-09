@@ -1,43 +1,40 @@
-# from flask_mail import Message
-# from app import mail
-# from threading import Thread
-# from flask import current_app
-
-# def send_async_email(app, msg):
-#     # Flask-Mail requires an active application context to access configuration fields safely
-#     with app.app_context():
-#         mail.send(msg)
-
-# def send_email(to, subject, body):
-#     """
-#     Send an HTML formatted email asynchronously using background threading.
-#     """
-#     # Grab a reference to the active production application instance
-#     app = current_app._get_current_object()
-    
-#     msg = Message(
-#         subject=subject,
-#         recipients=[to],
-#         html=body
-#     )
-    
-#     # Spin up an isolated background thread to handle the network traffic socket handshake
-#     thr = Thread(target=send_async_email, args=[app, msg])
-#     thr.start()
-#     return thr
-
 import os
-import resend
+import base64
 
-resend.api_key = os.getenv("RESEND_API_KEY")
+from email.mime.text import MIMEText
+from google.oauth2.credentials import Credentials
+from google.auth.transport.requests import Request
+from googleapiclient.discovery import build
+
+
+SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
 
 
 def send_email(to, subject, body):
-    params = {
-        "from": "Afflux <onboarding@resend.dev>",
-        "to": [to],
-        "subject": subject,
-        "html": body,
-    }
+    creds = Credentials(
+        token=None,
+        refresh_token=os.getenv("GMAIL_REFRESH_TOKEN"),
+        token_uri="https://oauth2.googleapis.com/token",
+        client_id=os.getenv("GMAIL_CLIENT_ID"),
+        client_secret=os.getenv("GMAIL_CLIENT_SECRET"),
+        scopes=SCOPES,
+    )
 
-    return resend.Emails.send(params)
+    # Get fresh access token
+    creds.refresh(Request())
+
+    service = build("gmail", "v1", credentials=creds)
+
+    message = MIMEText(body, "html")
+    message["to"] = to
+    message["from"] = os.getenv("GMAIL_SENDER")
+    message["subject"] = subject
+
+    raw = base64.urlsafe_b64encode(
+        message.as_bytes()
+    ).decode()
+
+    service.users().messages().send(
+        userId="me",
+        body={"raw": raw}
+    ).execute()

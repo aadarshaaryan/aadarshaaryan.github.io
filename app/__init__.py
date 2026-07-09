@@ -54,6 +54,21 @@ def create_app():
     app.register_blueprint(profile_bp)
     app.register_blueprint(hackathons_bp)
 
+    @app.route("/smtp-test")
+    def smtp_test():
+        import smtplib
+
+        try:
+            s = smtplib.SMTP(
+                "smtp.gmail.com",
+                587,
+                timeout=10
+            )
+            s.quit()
+            return "Connected!"
+        except Exception as e:
+            return str(e)
+
     @app.errorhandler(404)
     def page_not_found(e):
         return render_template("extra/404.html"), 404

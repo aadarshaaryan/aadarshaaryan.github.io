@@ -27,7 +27,7 @@ def send_email(to, subject, body):
 
     message = MIMEText(body, "html")
     message["to"] = to
-    message["from"] = os.getenv("GMAIL_SENDER")
+    message["from"] = f"Afflux <{os.getenv('GMAIL_SENDER')}>"
     message["subject"] = subject
 
     raw = base64.urlsafe_b64encode(

@@ -17,6 +17,8 @@ instance/
 
 # Environment variables
 .env
+credentials.json
+token.json
 .env.*
 
 # VS Code
@@ -53,6 +55,3 @@ htmlcov/
 # Temporary files
 *.tmp
 *.temp
-
-/credentials.json
-/token.json

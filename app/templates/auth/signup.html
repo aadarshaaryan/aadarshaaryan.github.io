@@ -21,20 +21,45 @@
         {% endif %}
         {% endwith %}
     </div>
-    
+
     <div class="form-container">
         <h2>Sign up</h2>
         <form action="/signup" method="POST">
-            <input type="text" id="username" name="username" placeholder="username" required>
+            <p class="lable">Full Name</p>
+            <input type="text" id="fullname" name="fullname" minlength="3" maxlength="30"
+                placeholder="minimum 3 characters" required>
 
-            <input type="password" id="password" name="password" placeholder="password" required>
+            <input type="email" name="gmail" id="gmail" required pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
+                title="Please enter a valid Gmail address ending in @gmail.com" placeholder="yourname@gmail.com">
+
+            <p class="lable">Create Password</p>
+            <input type="password" id="password" name="password" placeholder="minimum 6 characters" () minlength="6"
+                required>
+            <div class="strength-meter">
+                <progress max="4" value="0" id="meter"></progress>
+                <p id="strength-text"></p>
+            </div>
+
+            <div class="agreement-container">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="agree_to_terms" id="agree-checkbox">
+                    <span class="custom-checkbox"></span>
+                    <span class="label-text">
+                        I agree to the
+                        <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+                        and
+                        <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+                    </span>
+                </label>
+            </div>
 
             <button type="submit">Create Account</button>
-        </form>
-        <p>Already have an account? <a href="{{ url_for('auth.login') }}">Sign in</a></p>
 
-        <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+        </form>
+        <p class="bottom-line">Already have an account? <a href="{{ url_for('auth.signin') }}">Sign in</a></p>
+
         <script src="{{ url_for('static', filename='js/notify.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
     </div>
 </body>
 

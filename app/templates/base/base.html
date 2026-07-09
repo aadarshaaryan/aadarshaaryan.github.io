@@ -22,6 +22,12 @@
         <a href="{{ url_for('main.blog') }}">Blog</a>
         <a href="{{ url_for('main.hackathons') }}">Hackathons</a>
         <a href="{{ url_for('main.contacts') }}">Contact</a>
+        
+        {% if session.get('user_id') %}
+        <a href="{{ url_for('profile.profile') }}">Your Profile</a>
+        {% else %}
+        <a href="{{ url_for('auth.signup') }}">Sign up</a>
+        {% endif %}
     </div>
     <header>
         <nav>
@@ -35,16 +41,15 @@
                 </li>
                 <li><a href="{{ url_for('main.home') }}">Home</a></li>
 
-
                 <li class="desktop_nav"><a href="{{ url_for('main.portfolio') }}">Portfolio</a></li>
                 <li class="desktop_nav"><a href="{{ url_for('main.blog') }}">Blog</a></li>
                 <li class="desktop_nav"><a href="{{ url_for('main.hackathons') }}">Hackathons</a></li>
                 <li class="desktop_nav"><a href="{{ url_for('main.contacts') }}">Contact</a></li>
 
                 {% if session.get('user_id') %}
-                <li><a href="{{ url_for('profile.profile') }}">Your Profile</a></li>
+                <li class="desktop_nav"><a href="{{ url_for('profile.profile') }}">Your Profile</a></li>
                 {% else %}
-                <li><a href="{{ url_for('auth.signup') }}">Sign up</a></li>
+                <li class="desktop_nav"><a href="{{ url_for('auth.signup') }}">Sign up</a></li>
                 {% endif %}
 
                 <li class="mobile_nav">
@@ -55,7 +60,6 @@
                     </a>
                 </li>
             </ul>
-
         </nav>
     </header>
 
@@ -63,7 +67,6 @@
         {% block content %}{% endblock %}
         <div class="bottom-nav-w">
             <div class="bottom-nav">
-                
                 <div class="bottom-nav-items hidden">
                     <i class="fa-solid fa-users"></i>
                 </div>
@@ -71,7 +74,6 @@
                     <i class="fa-solid fa-user-shield"></i>
                 </div>
                 <div class="bottom-nav-items hidden"></div>
-
                 <div class="bottom-nav-items hidden"></div>
                 <div class="bottom-nav-items last_main_nav">
                     <i class="fa-solid fa-angles-left"></i>
@@ -82,8 +84,6 @@
 
     <footer class="terminal-footer">
         <div class="footer-wrapper">
-
-
             <div class="footer-upper">
                 <div class="footer-brand-node">
                     <div class="footer-status-indicator">
@@ -97,30 +97,23 @@
                 </div>
 
                 <div class="footer-links-group">
-
                     <div>
                         <h4 class="footer-column-title">// Network Links</h4>
-                        <ul class="footer-comms-list"
-                            style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start;">
-                            <li><a href="https://www.linkedin.com/in/aadarsh-kumar-329308415/" target="_blank"
-                                    rel="noopener">GitHub</a></li>
-                            <li><a href="https://instagram.com/aadarshaaryan.official" target="_blank"
-                                    rel="noopener">LinkedIn</a></li>
+                        <ul class="footer-comms-list" style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start;">
+                            <li><a href="https://www.linkedin.com/in/aadarsh-kumar-329308415/" target="_blank" rel="noopener">GitHub</a></li>
+                            <li><a href="https://instagram.com/aadarshaaryan.official" target="_blank" rel="noopener">LinkedIn</a></li>
                             <li><a href="https://wa.me/9473494484">Whatshapp</a></li>
                         </ul>
                     </div>
 
-
                     <div>
                         <h4 class="footer-column-title">// Navigation</h4>
-                        <ul class="footer-comms-list"
-                            style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start;">
+                        <ul class="footer-comms-list" style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start;">
                             <li><a href="{{ url_for('auth.signup') }}">Sign up</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-
 
             <div class="footer-lower">
                 <div class="footer-copyright">
@@ -131,7 +124,6 @@
                     <a href="#">/TERMS_OF_SERVICE</a>
                 </div>
             </div>
-
         </div>
     </footer>
 

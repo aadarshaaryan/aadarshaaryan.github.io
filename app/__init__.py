@@ -1,39 +1,45 @@
 from flask import Flask, render_template
-from flask_mail import Mail
 from dotenv import load_dotenv
 import os
 
-from app.models import init_db
+from app.extensions import db, mail
 
 load_dotenv()
-
-mail = Mail()
 
 
 def create_app():
     app = Flask(__name__)
 
-    app.secret_key = os.environ.get(
+    app.secret_key = os.getenv(
         "FLASK_SECRET_KEY",
-        "jgfjiosfjksdfjosd_fallback_key"
+        "4a7b2e91f3c8d0e5b7a692341d6f5e8c7b8a1234567890abcdef1234567890ab"
     )
 
-    # Mail Configuration
+    # PostgreSQL
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
+        "DATABASE_URL"
+    )
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+    # TEMPORARY: show SQL queries in terminal
+    app.config["SQLALCHEMY_ECHO"] = True
+
+    # Mail
     app.config["MAIL_SERVER"] = os.getenv("MAIL_SERVER")
     app.config["MAIL_PORT"] = int(os.getenv("MAIL_PORT"))
-    app.config["MAIL_USE_TLS"] = os.getenv("MAIL_USE_TLS") == "True"
+    app.config["MAIL_USE_TLS"] = (
+        os.getenv("MAIL_USE_TLS") == "True"
+    )
+    app.config["MAIL_USE_SSL"] = False
     app.config["MAIL_USERNAME"] = os.getenv("MAIL_USERNAME")
     app.config["MAIL_PASSWORD"] = os.getenv("MAIL_PASSWORD")
     app.config["MAIL_DEFAULT_SENDER"] = (
-    "Afflux",
-    os.getenv("MAIL_USERNAME")
-)
+        "Afflux",
+        os.getenv("MAIL_USERNAME")
+    )
 
-    # Initialize Flask-Mail
+    db.init_app(app)
     mail.init_app(app)
-
-    with app.app_context():
-        init_db()
 
     from app.routes.main import main_bp
     from app.routes.auth import auth_bp

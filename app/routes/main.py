@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, redirect, flash, url_for, jsonify
 import sqlite3
-from app.services.email_service import send_email
 
 main_bp = Blueprint("main", __name__)
 DB_NAME = "database.db"
@@ -34,16 +33,3 @@ def show_users():
         rows = cursor.fetchall()
     return render_template("main/users.html", users=rows)
 
-
-@main_bp.route("/test-email")
-def test_email():
-    send_email(
-        "uttamkumar96442@gmail.com",
-        "aaditya harami hai",
-        "aaditya harami hai."
-    )
-    return "Email sent! Aadarsh 🥳"
-
-@main_bp.get("/health")
-def health():
-    return jsonify({"status": "ok"}), 200

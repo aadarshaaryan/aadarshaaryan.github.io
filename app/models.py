@@ -1,16 +1,13 @@
-import sqlite3
+from app.extensions import db
 
-DB_NAME = "database.db"
+from flask_sqlalchemy import SQLAlchemy
 
-def init_db():
-    """Initializes the database schema if tables do not exist."""
-    with sqlite3.connect(DB_NAME) as connection:
-        cursor = connection.cursor()
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                username TEXT UNIQUE NOT NULL,
-                password TEXT NOT NULL
-            )
-        """)
-        connection.commit()
+db = SQLAlchemy()
+
+class User(db.Model):
+    __tablename__ = 'users'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    fullname = db.Column(db.String(30), nullable=False)
+    gmail = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(128), nullable=False)

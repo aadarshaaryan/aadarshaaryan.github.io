@@ -25,13 +25,13 @@
     <div class="form-container">
         <h2>Sign in</h2>
         <form action="/login" method="POST">
-            <input type="text" id="username" name="username" placeholder="username" required>
+            <input type="text" id="gmail" name="gmail" placeholder="yournam@gmail.com" required>
 
             <input type="password" id="password" name="password" placeholder="password" required>
 
             <button type="submit">Login</button>
         </form>
-        <p>Don't have an account? <a href="{{ url_for('auth.signup') }}">Sign up</a></p>
+        <p class="bottom-line">Don't have an account? <a href="{{ url_for('auth.signup') }}">Sign up</a></p>
 
         <script src="{{ url_for('static', filename='js/notify.js') }}"></script>
     </div>

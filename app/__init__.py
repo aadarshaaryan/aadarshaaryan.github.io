@@ -61,7 +61,7 @@ def create_app():
         try:
             s = smtplib.SMTP(
                 "smtp.gmail.com",
-                587,
+                2587,
                 timeout=10
             )
             s.quit()

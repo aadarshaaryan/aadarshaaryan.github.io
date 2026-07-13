@@ -21,7 +21,6 @@
         <a href="{{ url_for('profile.users') }}">Users</a>
         <a href="{{ url_for('events.list_events') }}">Events</a>
         <a href="">Credentials</a>
-        <a href="{{ url_for('main.hackathons') }}">Hackathons</a>
         <a href="{{ url_for('main.contacts') }}">Contact</a>
 
         {% if session.get('username') %}
@@ -29,7 +28,6 @@
         <a href="{{ url_for('auth.signout') }}">Sign Out</a>
         {% else %}
         <a href="{{ url_for('auth.signin') }}">Sign In</a>
-        <a href="{{ url_for('auth.signup') }}">Sign Up</a>
         {% endif %}
     </div>
 
@@ -47,7 +45,6 @@
                 <li class="desktop_nav"><a href="{{ url_for('profile.users') }}">Users</a></li>
                 <li class="desktop_nav"><a href="{{ url_for('events.list_events') }}">Events</a></li>
                 <li class="desktop_nav"><a href="">Credentials</a></li>
-                <li class="desktop_nav"><a href="{{ url_for('main.hackathons') }}">Hackathons</a></li>
                 <li class="desktop_nav"><a href="{{ url_for('main.contacts') }}">Contact</a></li>
 
                 {% if session.get('is_admin') %}
@@ -82,23 +79,31 @@
 
         <div class="bottom-nav-w">
             <div class="bottom-nav">
-                <div class="bottom-nav-items hidden">
+                {% if session.get('username') %}
+                <a href="{{ url_for('profile.profile', username=session['username']) }}"
+                    class="bottom-nav-items hidden">
                     <i class="fa-solid fa-user-shield"></i>
-                </div>
-                <div class="bottom-nav-items hidden">
+                </a>
+                {% else %}
+                <a href="{{ url_for('auth.signin') }}" class="bottom-nav-items hidden">
+                    <i class="fa-solid fa-user-shield"></i>
+                </a>
+                {% endif %}
+                <a href="/users" class="bottom-nav-items hidden">
                     <i class="fa-solid fa-users"></i>
-                </div>
-                <div class="bottom-nav-items hidden">
+                </a>
+                <a href="" class="bottom-nav-items hidden">
                     <i class="fa-solid fa-ranking-star"></i>
-                </div>
-                <div class="bottom-nav-items hidden">
+                </a>
+                <a href="/events" class="bottom-nav-items hidden">
                     <i class="fa-solid fa-calendar-day"></i>
-                </div>
-                <div class="bottom-nav-items last_main_nav">
+                </a>
+                <a class="bottom-nav-items last_main_nav">
                     <i class="fa-solid fa-angles-left"></i>
-                </div>
+                </a>
             </div>
         </div>
+
     </main>
 
     <footer class="terminal-footer">

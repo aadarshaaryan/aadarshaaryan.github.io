@@ -12,10 +12,6 @@ def home():
 def contacts():
     return render_template('navs/contacts.html')
 
-@main_bp.route('/hackathons')
-def hackathons():
-    return render_template('navs/hackathons.html')
-
 @main_bp.route('/unavaialable-user')
 def unavailable_user():
     return render_template('extra/blocked_user.html')

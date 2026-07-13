@@ -8,28 +8,14 @@ DB_NAME = "database.db"
 def home():
     return render_template('main/index.html')
 
-@main_bp.route('/blog')
-def blog():
-    return render_template('navs/blog.html')
-
 @main_bp.route('/contacts')
 def contacts():
     return render_template('navs/contacts.html')
-
-@main_bp.route('/portfolio')
-def portfolio():
-    flash("I'm currently refining my portfolio to showcase my best work. It'll be available soon.")
-    return redirect(url_for('main.home'))
 
 @main_bp.route('/hackathons')
 def hackathons():
     return render_template('navs/hackathons.html')
 
-@main_bp.route("/users")
-def show_users():
-    with sqlite3.connect(DB_NAME) as connection:
-        cursor = connection.cursor()
-        cursor.execute("SELECT id, username FROM users")
-        rows = cursor.fetchall()
-    return render_template("main/users.html", users=rows)
-
+@main_bp.route('/unavaialable-user')
+def unavailable_user():
+    return render_template('extra/blocked_user.html')

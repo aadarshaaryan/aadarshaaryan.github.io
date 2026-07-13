@@ -21,6 +21,7 @@ if (sidebarClose) {
     });
 }
 
+// Close mobile menu if clicked outside
 document.addEventListener("click", function (e) {
     if (mobileMenu && mobileToggle) {
         let isClickInsideMenu = mobileMenu.contains(e.target);
@@ -32,8 +33,9 @@ document.addEventListener("click", function (e) {
     }
 });
 
+// Mobile bottom slider layout toggle
 var swiped = false;
-var last_main_nav = document.querySelector(".bottom-nav-items:last-child");
+var last_main_nav = document.querySelector(".last_main_nav"); // Targeted using class assigned in HTML
 var mobile_nav = document.querySelector(".bottom-nav");
 var hiddenLinks = document.querySelectorAll(".bottom-nav-items.hidden");
 
@@ -43,7 +45,6 @@ function swipe_left() {
     }
 
     last_main_nav.addEventListener("click", function () {
-        
         // Toggle the rotation class smoothly
         last_main_nav.classList.toggle("rotated");
 
@@ -52,7 +53,7 @@ function swipe_left() {
             link.classList.toggle("hidden-item");
         });
 
-        // Handle the container shrinking logic
+        // Handle the container shrinking logic seamlessly
         if (!swiped) {
             mobile_nav.classList.add("is-shrunk");
             swiped = true;

@@ -1,178 +1,293 @@
 :root {
-  --bg-main: #12181F;
-  --text-primary: #FFFFFF;
-  --text-muted: #A0AEC0;
-  --accent-blue: #38BDF8;
-  --accent-glow: rgba(56, 189, 248, 0.15);
+    --bg-main: #0f172a;
+    --bg-card: rgba(30, 41, 59, 0.4);
+    --bg-input: #0b0f19;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --color-indigo: #6366f1;
+    --color-indigo-hover: #4f46e5;
+    --color-cyan: #06b6d4;
+    --border-light: rgba(148, 163, 184, 0.12);
+    --font-stack: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+    /* Strength colors mapping indicators */
+    --strength-weak: #f43f5e;
+    --strength-medium: #f59e0b;
+    --strength-strong: #10b981;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  min-height: 100vh;
-  background-color: var(--bg-main);
-  color: var(--text-primary);
-  overflow-x: hidden;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: var(--font-stack);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
 }
 
-.form-container {
-  max-width: 400px;
-  width: 90%;
-  margin: 50px auto 50px auto;
-  padding: 30px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  border-radius: 13px;
-  position: relative;
-  background: #fff;
-  z-index: 1;
-  box-shadow: 2.5px 2.5px 5px #38BDF8;
-  background: linear-gradient(135deg, #38bff83c, #12181F, #12181F);
+/* Auth Layout Container */
+.auth-wrapper {
+    width: 100%;
+    max-width: 440px;
 }
 
-.form-container a {
-  color: #38BDF8;
+.auth-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 1.5rem;
+    padding: 2.5rem 2rem;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3);
 }
 
-#otp,
-#fullname,
-#gmail,
-#password,
-button {
-  height: 60px;
-  width: 100%;
-  border-radius: 50px;
-  border: none;
-  padding: 0 12px;
-  font-size: 1rem;
-  background-color: rgb(171, 171, 171);
-  transition: 0.1s;
-  margin-bottom: 20px;
+/* Header Typography */
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
-#password{
-  margin-bottom: 0 !important;
+.auth-brand {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: transparent;
+    background: linear-gradient(to right, #818cf8, var(--color-cyan));
+    background-clip: text;
+    -webkit-background-clip: text;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    text-decoration: none;
 }
 
-input::placeholder {
-  color: rgb(87, 87, 87);
+.auth-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
 }
 
-#otp,
-#fullname:hover,
-#gmail:hover,
-#password:hover,
-button:hover {
-  box-shadow: 0 0 20px white;
-  background-color: white;
+.auth-subtitle {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
 }
 
-button {
-  margin-bottom: 0 !important;
-  cursor: pointer;
-  background-color: #38BDF8;
-  margin-top: 16px;
+.auth-subtitle a {
+    color: var(--color-indigo);
+    text-decoration: none;
+    font-weight: 500;
 }
 
-h2 {
-  text-align: center;
+.auth-subtitle a:hover {
+    text-decoration: underline;
 }
 
-.bottom-line {
-  font-size: 0.9rem;
-  text-align: center;
+/* Form Styling */
+.form-group {
+    margin-bottom: 1.25rem;
 }
 
-.agreement-container {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+.form-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
 }
 
-.checkbox-label input[type="checkbox"] {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
+.input-field {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-light);
+    border-radius: 0.75rem;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--color-indigo);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* Relative positioning for the password toggle overlay element */
+.input-relative-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-input-pad {
+    padding-right: 2.75rem;
+    /* Stop text running under the eye button */
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease;
+}
+
+.password-toggle-btn:hover {
+    color: var(--text-primary);
+}
+
+/* Password Strength Meter Component Structure Styles */
+.password-strength-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+meter {
+    flex-grow: 1;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+}
+
+/* Styling meter tracks cleanly across cross-browsers (Webkit & Firefox) */
+meter::-webkit-meter-bar {
+    background: var(--bg-input);
+    border: none;
+    height: 6px;
+}
+
+meter::-webkit-meter-optimum-value {
+    background: var(--strength-strong);
+    transition: width 0.3s ease;
+}
+
+meter::-webkit-meter-suboptimum-value {
+    background: var(--strength-medium);
+    transition: width 0.3s ease;
+}
+
+meter::-webkit-meter-even-less-good-value {
+    background: var(--strength-weak);
+    transition: width 0.3s ease;
+}
+
+meter::-moz-meter-bar {
+    background: var(--strength-strong);
+}
+
+meter:-moz-meter-optimum::-moz-meter-bar {
+    background: var(--strength-strong);
+}
+
+meter:-moz-meter-suboptimum::-moz-meter-bar {
+    background: var(--strength-medium);
+}
+
+meter:-moz-meter-even-less-good::-moz-meter-bar {
+    background: var(--strength-weak);
+}
+
+#strength-text {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+/* Checkbox Alignment */
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin: 1.25rem 0;
+}
+
+.checkbox-input {
+    margin-top: 0.2rem;
+    accent-color: var(--color-indigo);
+    cursor: pointer;
 }
 
 .checkbox-label {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  cursor: pointer;
-  font-size: 14px;
-  color: #ffffff;
-  user-select: none;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
 }
 
-.custom-checkbox {
-  position: relative;
-  top: 2px;
-  height: 18px;
-  width: 18px;
-  background-color: #fff;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  flex-shrink: 0;
-  transition: all 0.2s ease;
+/* Primary Form Action Button */
+.btn-submit {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--color-indigo);
+    color: #ffffff;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 0.5rem;
 }
 
-.checkbox-label input:checked~.custom-checkbox {
-  background-color: #0066cc;
-  border-color: #0066cc;
+.btn-submit:hover {
+    background-color: var(--color-indigo-hover);
 }
 
-.custom-checkbox:after {
-  content: "";
-  position: absolute;
-  display: none;
-  left: 5px;
-  top: 1px;
-  width: 4px;
-  height: 9px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+/* Message Flash Alert System Styling */
+
+.flash-messages {
+    margin-bottom: 1.25rem;
+    list-style: none;
 }
 
-.checkbox-label input:checked~.custom-checkbox:after {
-  display: block;
+.flash-item {
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    background-color: rgba(244, 63, 94, 0.1);
+    color: #f43f5e;
+    border: 1px solid rgba(244, 63, 94, 0.2);
+    margin-bottom: 0.5rem;
 }
 
-.checkbox-label a {
-  color: #38BDF8;
-  text-decoration: none;
-  font-weight: 500;
+.flash-item-signin {
+    background-color: rgba(56, 189, 248, 0.1);
+    color: #38BDF8;
+    border: 1px solid rgba(244, 63, 94, 0.2);
 }
 
-.checkbox-label a:hover {
-  text-decoration: underline;
+.flash-item-otp {
+    background-color: rgba(56, 189, 248, 0.1);
+    color: #38BDF8;
+    border: 1px solid rgba(244, 63, 94, 0.2);
 }
 
-.strength-meter {
-  margin-bottom: 20px;
-}
-
-@media (max-width: 480px) {
-  .form-container {
-    margin: 50px auto 0 auto;
-    padding: 20px 15px;
-    gap: 40px;
-  }
-
-  input,
-  button {
-    height: 60px;
-    font-size: 0.9rem;
-  }
-
-  h2 {
-    font-size: 1.2rem;
-  }
+/* Specific UI Layout Adjustments for OTP inputs */
+.otp-input-center {
+    text-align: center;
+    font-size: 1.75rem;
+    letter-spacing: 0.5rem;
+    font-weight: 700;
+    padding-left: 1.25rem;
 }

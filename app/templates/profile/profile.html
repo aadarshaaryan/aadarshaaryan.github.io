@@ -1,89 +1,153 @@
 {% extends "base/base.html" %}
 
-{% block title %}User Dashboard | Certificates & Badges{% endblock %}
+{% block title %}{{ target_user.name or target_user.username }}'s Profile | Afflux{% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=1.3">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}?v=1.3">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}?v=1.4">
 {% endblock %}
 
 {% block content %}
-<div class="user-dashboard-container">
+<div class="profile-dashboard-container">
+    <main class="profile-layout-grid">
 
-    <!-- User Overview Header (Isolated using section) -->
-    <section class="dashboard-user-header">
-        <div class="user-profile-meta">
-            <h1 class="user-display-name">Welcome back, {{ current_user.name if current_user else "Developer" }}</h1>
-            <p class="user-account-sub">Manage your earned industry credentials, verified certificates, and achievement tracking marks.</p>
+        <aside class="profile-sidebar">
+            <div class="glass-card identity-card">
+                <div class="avatar-container">
+                    <img class="user-avatar"
+                        src="{{ target_user.profile_pic or 'https://api.dicebear.com/7.x/bottts/svg?seed=' ~ target_user.username }}"
+                        alt="{{ target_user.username }}'s Avatar">
+                    {% if is_owner %}
+                    <span class="edit-avatar-badge" title="Change Profile Picture">
+                        <i class="fa-solid fa-camera"></i>
+                    </span>
+                    {% endif %}
+                </div>
+
+                <div class="identity-meta">
+                    <h2 class="display-name">{{ target_user.name or target_user.username }}</h2>
+                    <p class="user-handle">u/{{ target_user.username }}</p>
+                </div>
+
+                <div class="gamification-status-box">
+                    <div class="level-badge-row">
+                        <span class="lvl-text">LEVEL</span>
+                        <span class="lvl-number">{{ target_user.level }}</span>
+                    </div>
+                    <div class="exp-track-container">
+                        <div class="exp-text-metrics">
+                            <span>EXP Progress</span>
+                            <span>{{ target_user.exp }} XP</span>
+                        </div>
+                        <div class="exp-progress-track">
+                            {% set exp_width = (target_user.exp % 100) if target_user.exp is not none else 0 %}
+                            <div class="exp-progress-fill" style="--exp-width: {{ exp_width }}%;"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="bio-section">
+                    {% if target_user.bio %}
+                    <p class="bio-text">{{ target_user.bio }}</p>
+                    {% else %}
+                    <p class="bio-text placeholder-text">No custom bio summary written yet.</p>
+                    {% endif %}
+                </div>
+
+                <div class="social-links-grid">
+                    {% if target_user.github %}
+                    <a href="{{ target_user.github }}" target="_blank" class="social-icon" aria-label="GitHub"><i
+                            class="fa-brands fa-github"></i></a>
+                    {% endif %}
+                    {% if target_user.linkedin %}
+                    <a href="{{ target_user.linkedin }}" target="_blank" class="social-icon" aria-label="LinkedIn"><i
+                            class="fa-brands fa-linkedin"></i></a>
+                    {% endif %}
+                    {% if target_user.website %}
+                    <a href="{{ target_user.website }}" target="_blank" class="social-icon" aria-label="Website"><i
+                            class="fa-solid fa-globe"></i></a>
+                    {% endif %}
+                    {% if target_user.instagram %}
+                    <a href="{{ target_user.instagram }}" target="_blank" class="social-icon" aria-label="Instagram"><i
+                            class="fa-brands fa-instagram"></i></a>
+                    {% endif %}
+                    {% if target_user.youtube %}
+                    <a href="{{ target_user.youtube }}" target="_blank" class="social-icon" aria-label="YouTube"><i
+                            class="fa-brands fa-youtube"></i></a>
+                    {% endif %}
+                </div>
+
+                {% if is_owner %}
+                <div class="card-actions-wrapper">
+                    <a href="#" class="btn btn-outline-edit">
+                        <i class="fa-solid fa-user-gear"></i> Edit Profile Settings
+                    </a>
+                </div>
+                {% else %}
+                <div class="card-actions-wrapper">
+                    <a href="#" class="btn btn-outline-edit">
+                        <i class="fa-solid fa-user-gear"></i> Check your level
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </aside>
+
+        <section class="profile-main-content">
+
+            <div class="metrics-counters-grid">
+                <div class="glass-card metric-counter-card">
+                    <div class="metric-icon icon-cyan">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <div class="metric-data">
+                        <h3 class="metric-number">{{ target_user.events_participated }}</h3>
+                        <p class="metric-title">Events Joined</p>
+                    </div>
+                </div>
+
+                <div class="glass-card metric-counter-card">
+                    <div class="metric-icon icon-indigo">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div class="metric-data">
+                        <h3 class="metric-number">{{ target_user.events_won }}</h3>
+                        <p class="metric-title">Events Won</p>
+                    </div>
+                </div>
+
+                <div class="glass-card metric-counter-card">
+                    <div class="metric-icon icon-emerald">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="metric-data">
+                        <h3 class="metric-number">{{ target_user.certificates_count }}</h3>
+                        <p class="metric-title">Certificates Earned</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card content-showcase-box">
+                <div class="showcase-header">
+                    <h3 class="section-heading-title">// Verified Credentials & Achievements</h3>
+                </div>
+
+                <div class="empty-showcase-state">
+                    <div class="radar-ping-icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h4>No Credentials Attached</h4>
+                    <p>Verified certificates, badges, and hackathon wins linked to this developer's record account will
+                        appear listed right here.</p>
+                </div>
+            </div>
+
+        </section>
+        {% if is_owner %}
+        <div class="logout">
+            <a href="{{url_for('auth.signout')}}">Sign out</a>
         </div>
-    </section>
-
-    <!-- Main Content Split Matrix -->
-    <main class="dashboard-grid">
-        
-        <!-- SECTION A: VERIFIED CERTIFICATES -->
-        <section class="dashboard-panel">
-            <div class="panel-header">
-                <h2 class="panel-title">Your Verified Certificates</h2>
-                <p class="panel-desc">Official documents confirming your successful completion of specialized technical tracks.</p>
-            </div>
-            
-            <div class="certificate-list">
-                
-                <!-- Certificate Card Item -->
-                <!-- <div class="certificate-card">
-                    <div class="cert-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    </div>
-                    <div class="cert-details">
-                        <h3 class="cert-name">Afflux MVP Core Engineering</h3>
-                        <p class="cert-meta">Issued: July 2026 • ID: CERT-AFF-8492</p>
-                    </div>
-                    <div class="cert-action">
-                        <a href="#" class="btn-download-link" download>Download PDF &darr;</a>
-                    </div>
-                </div> -->
-
-            </div>
-        </section>
-
-        <!-- SECTION B: EARNED BADGES -->
-        <section class="dashboard-panel">
-            <div class="panel-header">
-                <h2 class="panel-title">Earned Badges</h2>
-                <p class="panel-desc">Visual milestones highlighting your continuous build activity and technical velocity.</p>
-            </div>
-            
-            <div class="badges-flex-wrapper">
-                
-                <!-- Badge 01 -->
-                <div class="badge-item-node" title="Completed initial setup sprint">
-                    <div class="badge-graphic-shield elite">
-                        <span>★</span>
-                    </div>
-                    <span class="badge-label-text">First Sprint</span>
-                </div>
-
-                <!-- Badge 02 -->
-                <div class="badge-item-node" title="Validated functional web core structure">
-                    <div class="badge-graphic-shield stable">
-                        <span>✔</span>
-                    </div>
-                    <span class="badge-label-text">Core Builder</span>
-                </div>
-
-                <!-- Placeholder Locked Badge -->
-                <div class="badge-item-node locked" title="Locked: Complete upcoming hackathon tracks to unlock">
-                    <div class="badge-graphic-shield gray">
-                        <span>🔒</span>
-                    </div>
-                    <span class="badge-label-text">Next Track</span>
-                </div>
-
-            </div>
-        </section>
-
+        {% endif %}
     </main>
-
 </div>
 {% endblock %}

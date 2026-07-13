@@ -4,63 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Create Your Account — Afflux</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/notify.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-    <div class="msg_wrapper">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        {% for msg in messages %}
-        <div id="notify" class="notify">
-            <p>{{ msg }}</p>
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-header">
+                <a href="#" class="auth-brand">Afflux</a>
+                <h1 class="auth-title">Get Started</h1>
+                <p class="auth-subtitle">Already have an account? <a href="{{ url_for('auth.signin') }}">Sign in</a></p>
+            </div>
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul class="flash-messages">
+                {% for message in messages %}
+                <li class="flash-item">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('auth.signup') }}" method="POST">
+                <div class="form-group">
+                    <label class="form-label" for="fullname">Full Name</label>
+                    <input class="input-field" type="text" id="fullname" name="fullname" placeholder="John Doe"
+                        value="{{ fullname }}" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="gmail">Google Email</label>
+                    <input class="input-field" type="email" id="gmail" name="gmail" placeholder="username@gmail.com"
+                        value="{{ gmail }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <div class="input-relative-wrapper">
+                        <!-- Password left blank intentionally for security metrics -->
+                        <input class="input-field password-input-pad" type="password" id="password" name="password"
+                            placeholder="••••••••" required>
+                        <button type="button" id="eye_cont" class="password-toggle-btn"
+                            aria-label="Toggle password visibility">
+                            <i id="eye" class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+
+                    <div class="password-strength-container">
+                        <meter id="meter" min="0" max="4" low="2" high="3" optimum="4" value="0"></meter>
+                        <span id="strength-text">Very Weak Password</span>
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input class="checkbox-input" type="checkbox" id="agree_to_terms" name="agree_to_terms" value="true"
+                        {% if agree %}checked{% endif %}>
+                    <label class="checkbox-label" for="agree_to_terms">
+                        I agree to the Terms of Service and Privacy Policy requirements.
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-submit">Create Account</button>
+            </form>
         </div>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
     </div>
 
-    <div class="form-container">
-        <h2>Sign up</h2>
-        <form action="/signup" method="POST">
-            <p class="lable">Full Name</p>
-            <input type="text" id="fullname" name="fullname" minlength="3" maxlength="30"
-                placeholder="minimum 3 characters" required>
-
-            <input type="email" name="gmail" id="gmail" required pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
-                title="Please enter a valid Gmail address ending in @gmail.com" placeholder="yourname@gmail.com">
-
-            <p class="lable">Create Password</p>
-            <input type="password" id="password" name="password" placeholder="minimum 6 characters" () minlength="6"
-                required>
-            <div class="strength-meter">
-                <progress max="4" value="0" id="meter"></progress>
-                <p id="strength-text"></p>
-            </div>
-
-            <div class="agreement-container">
-                <label class="checkbox-label">
-                    <input type="checkbox" name="agree_to_terms" id="agree-checkbox">
-                    <span class="custom-checkbox"></span>
-                    <span class="label-text">
-                        I agree to the
-                        <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a>
-                        and
-                        <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
-                    </span>
-                </label>
-            </div>
-
-            <button type="submit">Create Account</button>
-
-        </form>
-        <p class="bottom-line">Already have an account? <a href="{{ url_for('auth.signin') }}">Sign in</a></p>
-
-        <script src="{{ url_for('static', filename='js/notify.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
-    </div>
+    <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
 </body>
 
 </html>

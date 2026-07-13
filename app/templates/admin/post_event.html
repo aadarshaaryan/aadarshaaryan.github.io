@@ -1,0 +1,119 @@
+{% extends "base/base.html" %}
+
+{% block title %}Publish Event Node | Afflux{% endblock %}
+
+{% block content %}
+<div class="admin-form-shell" style="max-width: 700px; margin: 40px auto; padding: 0 20px; color: #ffffff;">
+    <div style="margin-bottom: 24px;">
+        <a href="{{ url_for('admin.dashboard') }}"
+            style="color: #38BDF8; text-decoration: none; font-size: 0.85rem; font-family: monospace;"><i
+                class="fa-solid fa-arrow-left"></i> Return to Core Dashboard</a>
+        <h3 style="color: #38BDF8; font-family: monospace; font-size: 1.5rem; margin: 10px 0 0 0;">//
+            INITIALIZE_EVENT_STREAM</h3>
+    </div>
+
+    <form action="{{ url_for('admin.post_event') }}" method="POST"
+        style="background: #050505; border: 1px solid #111; padding: 24px; border-radius: 8px; display: flex; flex-direction: column; gap: 20px;">
+
+        <div>
+            <label
+                style="display: block; font-size: 0.8rem; color: #666; text-transform: uppercase; margin-bottom: 6px; font-family: monospace;">Event
+                Title</label>
+            <input type="text" name="title" required placeholder="e.g. Afflux Winter Hackathon"
+                style="width: 100%; padding: 12px; background: #0c0c0c; border: 1px solid #222; border-radius: 6px; color: #fff; outline: none;">
+        </div>
+
+        <div>
+            <label
+                style="display: block; font-size: 0.8rem; color: #666; text-transform: uppercase; margin-bottom: 6px; font-family: monospace;">Short
+                Description Summary</label>
+            <textarea name="short_description" rows="3" placeholder="Briefly detail parameters and goals..."
+                style="width: 100%; padding: 12px; background: #0c0c0c; border: 1px solid #222; border-radius: 6px; color: #fff; outline: none; resize: vertical;"></textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+            <div>
+                <label
+                    style="display: block; font-size: 0.8rem; color: #666; text-transform: uppercase; margin-bottom: 6px; font-family: monospace;">Category</label>
+                <select name="category" required
+                    style="width: 100%; padding: 12px; background: #0c0c0c; border: 1px solid #222; border-radius: 6px; color: #fff; outline: none;">
+                    <option value="hackathon">Hackathon</option>
+                    <option value="quiz">Quiz</option>
+                    <option value="webinar">Webinar</option>
+                    <option value="scholarship">Scholarship</option>
+                    <option value="cultural">Cultural</option>
+                    <option value="competition">Competition</option>
+                </select>
+            </div>
+            <div>
+                <label
+                    style="display: block; font-size: 0.8rem; color: #666; text-transform: uppercase; margin-bottom: 6px; font-family: monospace;">Mode</label>
+                <select name="mode"
+                    style="width: 100%; padding: 12px; background: #0c0c0c; border: 1px solid #222; border-radius: 6px; color: #fff; outline: none;">
+                    <option value="online">Online</option>
+                    <option value="offline">Offline</option>
+                    <option value="hybrid">Hybrid</option>
+                </select>
+            </div>
+            <div>
+                <label
+                    style="display: block; font-size: 0.8rem; color: #666; text-transform: uppercase; margin-bottom: 6px; font-family: monospace;">Hosted By</label>
+                <input type="text" name="hosted_by" placeholder="Afflux"
+                    style="width: 100%; padding: 12px; background: #0c0c0c; border: 1px solid #222; border-radius: 6px; color: #fff; outline: none;">
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div>
+                <label
+                    style="display: block; font-size: 0.8rem; color: #666; text-transform: uppercase; margin-bottom: 6px; font-family: monospace;">Registration
+                    Window Opens</label>
+                <input type="datetime-local" name="registration_start"
+                    style="width: 100%; padding: 12px; background: #0c0c0c; border: 1px solid #222; border-radius: 6px; color: #fff; outline: none;">
+            </div>
+            <div>
+                <label
+                    style="display: block; font-size: 0.8rem; color: #666; text-transform: uppercase; margin-bottom: 6px; font-family: monospace;">Registration Deadline (Execution Starts)</label>
+                <input type="datetime-local" name="registration_deadline" required
+                    style="width: 100%; padding: 12px; background: #0c0c0c; border: 1px solid #222; border-radius: 6px; color: #fff; outline: none;">
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div>
+                <label
+                    style="display: block; font-size: 0.8rem; color: #666; text-transform: uppercase; margin-bottom: 6px; font-family: monospace;">Event Track Live Date</label>
+                <input type="datetime-local" name="event_start_date"
+                    style="width: 100%; padding: 12px; background: #0c0c0c; border: 1px solid #222; border-radius: 6px; color: #fff; outline: none;">
+            </div>
+            <div>
+                <label
+                    style="display: block; font-size: 0.8rem; color: #666; text-transform: uppercase; margin-bottom: 6px; font-family: monospace;">Final Submissions Window Closes</label>
+                <input type="datetime-local" name="submission_deadline" required
+                    style="width: 100%; padding: 12px; background: #0c0c0c; border: 1px solid #222; border-radius: 6px; color: #fff; outline: none;">
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; border-top: 1px solid #111; padding-top: 16px;">
+            <div>
+                <label
+                    style="display: block; font-size: 0.8rem; color: #666; text-transform: uppercase; margin-bottom: 6px; font-family: monospace;">External
+                    Signup Endpoint URL</label>
+                <input type="url" name="registration_url" placeholder="https://unstop.com/..."
+                    style="width: 100%; padding: 12px; background: #0c0c0c; border: 1px solid #222; border-radius: 6px; color: #fff; outline: none;">
+            </div>
+            <div>
+                <label
+                    style="display: block; font-size: 0.8rem; color: #666; text-transform: uppercase; margin-bottom: 6px; font-family: monospace;">Project
+                    Submission Gateway Link</label>
+                <input type="url" name="submit_url" placeholder="https://github.com/... or native path"
+                    style="width: 100%; padding: 12px; background: #0c0c0c; border: 1px solid #222; border-radius: 6px; color: #fff; outline: none;">
+            </div>
+        </div>
+
+        <button type="submit"
+            style="width: 100%; padding: 14px; background: #38BDF8; color: #000; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; text-transform: uppercase; font-family: monospace; letter-spacing: 0.5px; transition: background 0.2s;">Compile
+            & Broadcast Node</button>
+    </form>
+</div>
+{% endblock %}

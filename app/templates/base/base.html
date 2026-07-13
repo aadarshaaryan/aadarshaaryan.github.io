@@ -18,17 +18,21 @@
     <div id="mobile-menu" class="mobile-menu">
         <button id="sidebar-close" class="sidebar-close-btn">&times;</button>
 
-        <a href="{{ url_for('main.portfolio') }}">Portfolio</a>
-        <a href="{{ url_for('main.blog') }}">Blog</a>
+        <a href="{{ url_for('profile.users') }}">Users</a>
+        <a href="{{ url_for('events.list_events') }}">Events</a>
+        <a href="">Credentials</a>
         <a href="{{ url_for('main.hackathons') }}">Hackathons</a>
         <a href="{{ url_for('main.contacts') }}">Contact</a>
-        
-        {% if session.get('user_id') %}
-        <a href="{{ url_for('profile.profile') }}">Your Profile</a>
+
+        {% if session.get('username') %}
+        <a href="{{ url_for('profile.profile', username=session['username']) }}">Profile</a>
+        <a href="{{ url_for('auth.signout') }}">Sign Out</a>
         {% else %}
-        <a href="{{ url_for('auth.signup') }}">Sign up</a>
+        <a href="{{ url_for('auth.signin') }}">Sign In</a>
+        <a href="{{ url_for('auth.signup') }}">Sign Up</a>
         {% endif %}
     </div>
+
     <header>
         <nav>
             <ul>
@@ -40,16 +44,26 @@
                     </a>
                 </li>
                 <li><a href="{{ url_for('main.home') }}">Home</a></li>
-
-                <li class="desktop_nav"><a href="{{ url_for('main.portfolio') }}">Portfolio</a></li>
-                <li class="desktop_nav"><a href="{{ url_for('main.blog') }}">Blog</a></li>
+                <li class="desktop_nav"><a href="{{ url_for('profile.users') }}">Users</a></li>
+                <li class="desktop_nav"><a href="{{ url_for('events.list_events') }}">Events</a></li>
+                <li class="desktop_nav"><a href="">Credentials</a></li>
                 <li class="desktop_nav"><a href="{{ url_for('main.hackathons') }}">Hackathons</a></li>
                 <li class="desktop_nav"><a href="{{ url_for('main.contacts') }}">Contact</a></li>
 
-                {% if session.get('user_id') %}
-                <li class="desktop_nav"><a href="{{ url_for('profile.profile') }}">Your Profile</a></li>
+                {% if session.get('is_admin') %}
+                <li>
+                    <a href="{{ url_for('admin.dashboard') }}" class="admin-link"
+                        style="color: #38BDF8; font-family: monospace;">// ADMIN_CORE
+                    </a>
+                </li>
+                {% endif %}
+
+                {% if session.get('username') %}
+                <li>
+                    <a href="{{ url_for('profile.profile', username=session['username']) }}">Profile</a>
+                </li>
                 {% else %}
-                <li><a href="{{ url_for('auth.signup') }}">Sign up</a></li>
+                <li><a href="{{ url_for('auth.signin') }}">Sign in</a></li>
                 {% endif %}
 
                 <li class="mobile_nav">
@@ -65,16 +79,21 @@
 
     <main>
         {% block content %}{% endblock %}
+
         <div class="bottom-nav-w">
             <div class="bottom-nav">
+                <div class="bottom-nav-items hidden">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
                 <div class="bottom-nav-items hidden">
                     <i class="fa-solid fa-users"></i>
                 </div>
                 <div class="bottom-nav-items hidden">
-                    <i class="fa-solid fa-user-shield"></i>
+                    <i class="fa-solid fa-ranking-star"></i>
                 </div>
-                <div class="bottom-nav-items hidden"></div>
-                <div class="bottom-nav-items hidden"></div>
+                <div class="bottom-nav-items hidden">
+                    <i class="fa-solid fa-calendar-day"></i>
+                </div>
                 <div class="bottom-nav-items last_main_nav">
                     <i class="fa-solid fa-angles-left"></i>
                 </div>
@@ -99,17 +118,23 @@
                 <div class="footer-links-group">
                     <div>
                         <h4 class="footer-column-title">// Network Links</h4>
-                        <ul class="footer-comms-list" style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start;">
-                            <li><a href="https://www.linkedin.com/in/aadarsh-kumar-329308415/" target="_blank" rel="noopener">GitHub</a></li>
-                            <li><a href="https://instagram.com/aadarshaaryan.official" target="_blank" rel="noopener">LinkedIn</a></li>
-                            <li><a href="https://wa.me/9473494484">Whatshapp</a></li>
+                        <ul class="footer-comms-list"
+                            style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start;">
+                            <li><a href="https://github.com/your-github-username" target="_blank"
+                                    rel="noopener">GitHub</a></li>
+                            <li><a href="https://www.linkedin.com/in/aadarsh-kumar-329308415/" target="_blank"
+                                    rel="noopener">LinkedIn</a></li>
+                            <li><a href="https://instagram.com/aadarshaaryan.official" target="_blank"
+                                    rel="noopener">Instagram</a></li>
+                            <li><a href="https://wa.me/9473494484" target="_blank" rel="noopener">WhatsApp</a></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 class="footer-column-title">// Navigation</h4>
-                        <ul class="footer-comms-list" style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start;">
-                            <li><a href="{{ url_for('auth.signup') }}">Sign up</a></li>
+                        <ul class="footer-comms-list"
+                            style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start;">
+                            <li><a href="{{ url_for('auth.signin') }}">Sign in</a></li>
                         </ul>
                     </div>
                 </div>
@@ -131,7 +156,7 @@
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         {% for msg in messages %}
-        <div id="notify" class="notify">
+        <div class="notify notify_come">
             <p>{{ msg }}</p>
         </div>
         {% endfor %}

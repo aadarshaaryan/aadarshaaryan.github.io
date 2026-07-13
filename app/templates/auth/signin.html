@@ -4,36 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign In — Afflux</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/notify.css') }}">
 </head>
 
 <body>
-    <div class="msg_wrapper">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        {% for msg in messages %}
-        <div id="notify" class="notify">
-            <p>{{ msg }}</p>
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-header">
+                <a href="#" class="auth-brand">Afflux</a>
+                <h1 class="auth-title">Welcome Back</h1>
+                <p class="auth-subtitle">Don't have an account? <a href="{{ url_for('auth.signup') }}">Sign up</a></p>
+            </div>
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul class="flash-messages">
+                {% for message in messages %}
+                <li class="flash-item flash-item-signin">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('auth.signin') }}" method="POST">
+                <div class="form-group">
+                    <label class="form-label" for="gmail">Google Email</label>
+                    <input class="input-field" type="email" id="gmail" name="gmail" placeholder="username@gmail.com"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input class="input-field" type="password" id="password" name="password" placeholder="••••••••"
+                        required>
+                </div>
+
+                <button type="submit" class="btn-submit">Sign In</button>
+            </form>
         </div>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
-    </div>
-    
-    <div class="form-container">
-        <h2>Sign in</h2>
-        <form action="/login" method="POST">
-            <input type="text" id="gmail" name="gmail" placeholder="yournam@gmail.com" required>
-
-            <input type="password" id="password" name="password" placeholder="password" required>
-
-            <button type="submit">Login</button>
-        </form>
-        <p class="bottom-line">Don't have an account? <a href="{{ url_for('auth.signup') }}">Sign up</a></p>
-
-        <script src="{{ url_for('static', filename='js/notify.js') }}"></script>
     </div>
 </body>
 

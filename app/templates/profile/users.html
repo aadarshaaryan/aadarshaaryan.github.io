@@ -1,0 +1,84 @@
+{% extends "base/base.html" %}
+
+{% block title %}Discover People | Afflux{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/users.css') }}?v=1.4">
+{% endblock %}
+
+{% block content %}
+<div class="insta-container">
+    
+    <div class="insta-search-box">
+        <div class="search-input-wrapper">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="userSearchInput" placeholder="Search accounts..." autocomplete="off">
+        </div>
+    </div>
+
+    <div class="insta-list" id="usersList">
+        {% for user in users %}
+            <div class="searchable-user-item">
+                <a href="{{ url_for('profile.profile', username=user.username) }}" class="insta-row-link">
+                    <div class="insta-row">
+                        <div class="insta-avatar-col">
+                            {% if user.profile_pic %}
+                                <img src="{{ url_for('static', filename='uploads/' + user.profile_pic) }}" alt="{{ user.username }}" class="insta-img">
+                            {% else %}
+                                <div class="insta-default-avatar">{{ (user.name or user.username)[0] | upper }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="insta-info-col">
+                            <span class="insta-username" data-search-username="{{ user.username }}">{{ user.username }}</span>
+                            <span class="insta-fullname" data-search-fullname="{{ user.name or '' }}">{{ user.name or "Platform Member" }}</span>
+                            
+                            {% if user.bio %}
+                                <p class="insta-one-line-bio">{{ user.bio }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% else %}
+            <div class="insta-empty">
+                <p>No accounts found in the system yet.</p>
+            </div>
+        {% endfor %}
+
+        <div class="insta-empty" id="noResultsMessage" style="display: none;">
+            <p>No matching accounts discovered.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('userSearchInput').addEventListener('input', function() {
+    const searchFilter = this.value.toLowerCase().trim();
+    const userItems = document.querySelectorAll('.searchable-user-item');
+    let hasMatches = false;
+
+    userItems.forEach(item => {
+        // Grab the tracking strings out of our target custom data hooks
+        const username = item.querySelector('[data-search-username]').getAttribute('data-search-username').toLowerCase();
+        const fullname = item.querySelector('[data-search-fullname]').getAttribute('data-search-fullname').toLowerCase();
+
+        // Check if either match our input criteria
+        if (username.includes(searchFilter) || fullname.includes(searchFilter)) {
+            item.style.display = 'block';
+            hasMatches = true;
+        } else {
+            item.style.display = 'none';
+        }
+    });
+
+    // Toggle fallback dynamic placeholder container row
+    const noResults = document.getElementById('noResultsMessage');
+    if (searchFilter !== '' && !hasMatches) {
+        noResults.style.display = 'block';
+    } else {
+        noResults.style.display = 'none';
+    }
+});
+</script>
+{% endblock %}

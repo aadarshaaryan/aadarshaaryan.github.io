@@ -1,0 +1,35 @@
+{% extends "base/base.html" %}
+
+{% block title %}Admin Dashboard Hub | Afflux{% endblock %}
+
+{% block content %}
+<div class="admin-dashboard-wrapper" style="max-width: 900px; margin: 40px auto; padding: 0 20px; color: #ffffff;">
+    <div style="border-bottom: 1px solid #1a1a1a; padding-bottom: 20px; margin-bottom: 30px;">
+        <h2 style="color: #38BDF8; font-family: monospace; font-size: 1.7rem; margin: 0;">// AFFLUX_CENTRAL_CORE_v2.0
+        </h2>
+        <p style="color: #666; font-size: 0.9rem; margin-top: 4px;">Authorized Terminal Context: <span
+                style="color: #10B981;">{{ session['username'] }}</span></p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
+        <div
+            style="background: #050505; border: 1px solid #111; padding: 24px; border-radius: 8px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <h4 style="margin: 0 0 10px 0; color: #fff; display: flex; align-items: center; gap: 8px;"><i
+                        class="fa-solid fa-calendar-plus" style="color: #38BDF8;"></i> Event Engine</h4>
+                <p style="color: #888; font-size: 0.82rem; line-height: 1.5; margin: 0 0 20px 0;">Publish hackathons,
+                    quizzes, or webinars. Set dynamic deadline windows and platform tracking URLs.</p>
+            </div>
+            <a href="{{ url_for('admin.post_event') }}"
+                style="display: block; text-align: center; background: #38BDF8; color: #000; padding: 10px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.85rem;">Open
+                Terminal</a>
+        </div>
+
+        <div style="background: #050505; border: 1px solid #111; padding: 24px; border-radius: 8px; opacity: 0.5;">
+            <h4 style="margin: 0 0 10px 0; color: #666;"><i class="fa-solid fa-file-csv"></i> CSV Ingest Processing</h4>
+            <p style="color: #444; font-size: 0.82rem; line-height: 1.5; margin: 0;">Upload Unstop rosters to distribute
+                credits and EXP parameters.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

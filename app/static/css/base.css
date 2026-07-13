@@ -303,6 +303,7 @@ nav li:hover {
 }
 
 .bottom-nav {
+    border: 1px solid #10313e;
     border-radius: 20px;
     background-color: rgb(0, 0, 0);
     height: 60px;
@@ -331,13 +332,12 @@ nav li:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.2s ease;
 }
 
 .bottom-nav-items.hidden {
     width: 44px;
     opacity: 1;
-    transition: width 0.5s ease-in-out, opacity 0.4s ease-in-out, margin 0.5s ease-in-out, border 0.5s ease-in-out;
+    transition: width 0.5s ease-in-out, opacity 0.4s ease-in-out, margin 0.5s ease-in-out, border 0.5s ease-in-out, background-color 0.2s ease, color 0.2s ease;
 }
 
 .bottom-nav-items.hidden.hidden-item {
@@ -400,7 +400,6 @@ nav li:hover {
         height: 60px;
     }
 
-    /* FIXED: Prevent logo/hamburger crash */
     nav {
         justify-content: space-between;
     }

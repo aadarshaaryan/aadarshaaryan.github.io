@@ -1,227 +1,352 @@
-/* =========================================================================
-     PROFESSIONAL USER DASHBOARD STYLE SHEET
-     ========================================================================= */
-
-:root {
-    --bg-page: #12181F;
-    --bg-surface: #1E262F;
-    --text-main: #FFFFFF;
-    --text-muted: #A0AEC0;
-    --brand-accent: #38BDF8;
-    --border-line: rgba(255, 255, 255, 0.05);
-}
-
-.user-dashboard-container {
+/* Profile Page Structural Architecture Setup */
+.profile-dashboard-container {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 5rem 2rem;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: 2rem 1rem;
 }
 
-.user-dashboard-container *,
-.user-dashboard-container *::before,
-.user-dashboard-container *::after {
-    box-sizing: border-box;
-}
-
-
-.dashboard-user-header {
-    border-bottom: 1px solid var(--border-line);
-    padding-bottom: 2rem;
-    margin-bottom: 3.5rem;
-    display: block;
-    height: auto;
-    background: transparent;
-    overflow: visible;
-}
-
-.user-display-name {
-    font-size: 2.25rem;
-    font-weight: 800;
-    color: var(--text-main);
-    margin: 0 0 0.5rem 0;
-    letter-spacing: -0.02em;
-}
-
-.user-account-sub {
-    font-size: 1.05rem;
-    color: var(--text-muted);
-    margin: 0;
-}
-
-
-.dashboard-grid {
+.profile-layout-grid {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 2.5rem;
+    grid-template-columns: 340px 1fr;
+    gap: 2rem;
     align-items: start;
 }
 
-
-.dashboard-panel {
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-line);
-    border-radius: 12px;
+/* Base Glassmorphism Shared Utilities */
+.glass-card {
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 1.25rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     padding: 2rem;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
 }
 
-.panel-header {
-    margin-bottom: 2rem;
-}
-
-.panel-title {
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--text-main);
-    margin: 0 0 0.35rem 0;
-}
-
-.panel-desc {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin: 0;
-    line-height: 1.4;
-}
-
-
-.certificate-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.certificate-card {
-    background-color: rgba(18, 24, 31, 0.4);
-    border: 1px solid var(--border-line);
-    border-radius: 8px;
-    padding: 1.25rem 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    transition: border-color 0.2s ease;
-}
-
-.certificate-card:hover {
-    border-color: rgba(56, 189, 248, 0.3);
-}
-
-.cert-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.cert-details {
-    flex-grow: 1;
-}
-
-.cert-name {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--text-main);
-    margin: 0 0 0.25rem 0;
-}
-
-.cert-meta {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin: 0;
-}
-
-.btn-download-link {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--brand-accent);
-    text-decoration: none;
-    border: 1px solid rgba(56, 189, 248, 0.2);
-    padding: 0.5rem 0.85rem;
-    border-radius: 6px;
-    background: rgba(56, 189, 248, 0.02);
-    transition: all 0.2s ease;
-}
-
-.btn-download-link:hover {
-    background: var(--brand-accent);
-    color: #12181F;
-}
-
-
-.badges-flex-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-}
-
-.badge-item-node {
+/* Sidebar Profile Card Layout Component Rules */
+.identity-card {
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.6rem;
-    width: 80px;
 }
 
-.badge-graphic-shield {
-    width: 60px;
-    height: 60px;
+.avatar-container {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    margin-bottom: 1.5rem;
+}
+
+.user-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #0b0f19;
+    border: 2px solid rgba(56, 189, 248, 0.2);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
+}
+
+.edit-avatar-badge {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    background: #6366f1;
+    color: #ffffff;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
-    border: 2px solid transparent;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: 2px solid #0f172a;
+    transition: background 0.2s ease;
 }
 
-.badge-graphic-shield.elite {
-    background: rgba(56, 189, 248, 0.08);
-    border-color: var(--brand-accent);
-    color: var(--brand-accent);
+.edit-avatar-badge:hover {
+    background: #4f46e5;
 }
 
-.badge-graphic-shield.stable {
-    background: rgba(74, 222, 128, 0.08);
-    border-color: #4ADE80;
-    color: #4ADE80;
+.display-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f8fafc;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
 }
 
-.badge-graphic-shield.gray {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: var(--border-line);
-    color: rgba(255, 255, 255, 0.2);
+.user-handle {
+    font-size: 0.9rem;
+    color: #38bdf8;
+    font-weight: 500;
+    margin-top: 0.25rem;
 }
 
-.badge-item-node.locked {
-    opacity: 0.5;
+/* Gamification Progress Mechanics Styling Component layout rules */
+.gamification-status-box {
+    width: 100%;
+    background: #0b0f19;
+    border: 1px solid rgba(148, 163, 184, 0.08);
+    border-radius: 0.85rem;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    text-align: left;
 }
 
-.badge-label-text {
+.level-badge-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+}
+
+.lvl-text {
     font-size: 0.75rem;
+    color: #94a3b8;
+    letter-spacing: 0.05em;
+}
+
+.lvl-number {
+    font-size: 1.35rem;
+    color: #6366f1;
+}
+
+.exp-text-metrics {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    margin-bottom: 0.35rem;
+    font-weight: 500;
+}
+
+.exp-progress-track {
+    width: 100%;
+    height: 6px;
+    background: rgba(148, 163, 184, 0.1);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.exp-progress-fill {
+    width: var(--exp-width);
+    height: 100%;
+    background: linear-gradient(to right, #6366f1, #06b6d4);
+    border-radius: 999px;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bio-section {
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.bio-text {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    line-height: 1.5;
+}
+
+.bio-text.placeholder-text {
+    font-style: italic;
+    color: #64748b;
+}
+
+/* Social Link Icon Integration Grid Blueprint layouts mapping styles */
+.social-links-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    background: #0b0f19;
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    color: #94a3b8;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.social-icon:hover {
+    color: #f8fafc;
+    border-color: #38bdf8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.15);
+}
+
+.card-actions-wrapper {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.btn-outline-edit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.75rem;
+    background: transparent;
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    color: #818cf8;
+    border-radius: 0.75rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    color: var(--text-main);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-edit:hover {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: #6366f1;
+    color: #ffffff;
+}
+
+/* Right Metrics Summary Card Clusters layout design */
+.metrics-counters-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.metric-counter-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.5rem;
+}
+
+.metric-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+}
+
+.icon-cyan { background: rgba(6, 182, 212, 0.1); color: #06b6d4; }
+.icon-indigo { background: rgba(99, 102, 241, 0.1); color: #6366f1; }
+.icon-emerald { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+
+.metric-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f8fafc;
+    line-height: 1;
+}
+
+.metric-title {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    font-weight: 500;
+    margin-top: 0.25rem;
+}
+
+/* Portfolio Section Content Boxes Panels layout setup CSS rules */
+.content-showcase-box {
+    min-height: 340px;
+}
+
+.section-heading-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f8fafc;
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.empty-showcase-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    white-space: nowrap;
+    padding: 2.5rem 1.5rem;
+    color: #94a3b8;
 }
 
-/* =========================================================================
-     RESPONSIVE INTERACTIVE MEDIA QUERIES
-     ========================================================================= */
-@media (max-width: 900px) {
-    .dashboard-grid {
+.radar-ping-icon {
+    width: 64px;
+    height: 64px;
+    background: #0b0f19;
+    border: 1px solid rgba(148, 163, 184, 0.08);
+    color: #64748b;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.empty-showcase-state h4 {
+    font-size: 1.1rem;
+    color: #e2e8f0;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.empty-showcase-state p {
+    font-size: 0.875rem;
+    max-width: 400px;
+    line-height: 1.5;
+    color: #64748b;
+}
+
+.logout{
+    height: 40px;
+    width: 100px;
+    background-color: rgb(146, 0, 0);
+    font-weight: bolder;
+    color: white;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+.logout a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    width: 100%;
+}
+
+/* Responsive Media Blueprint Breakdown Queries Layout adjustments */
+@media (max-width: 968px) {
+    .profile-layout-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+    }
+    
+    .profile-sidebar {
+        position: static;
     }
 }
 
-@media (max-width: 480px) {
-    .certificate-card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
+@media (max-width: 640px) {
+    .metrics-counters-grid {
+        grid-template-columns: 1fr;
     }
-    .btn-download-link {
-        width: 100%;
-        display: block;
-        text-align: center;
-    }
+
 }

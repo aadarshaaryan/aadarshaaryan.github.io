@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, flash, redirect, url_for
+from flask import Blueprint, render_template
 
 hackathons_bp = Blueprint("hackathons", __name__)
 

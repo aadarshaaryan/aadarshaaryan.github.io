@@ -93,7 +93,6 @@
     color: var(--text-primary);
 }
 
-
 @media (max-width: 480px) {
     .contact-section {
         padding: 3rem 1rem;

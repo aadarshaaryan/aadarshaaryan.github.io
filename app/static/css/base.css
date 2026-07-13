@@ -47,17 +47,8 @@ nav {
     align-items: center;
 }
 
-nav img {
-    height: 100px;
-}
-
-.logo_w {
-    height: 100%;
-    width: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+.logo {
+    height: 50px;
 }
 
 nav ul {
@@ -302,6 +293,10 @@ nav li:hover {
     display: none;
 }
 
+.bottom-nav a{
+    text-decoration: none;
+}
+
 .bottom-nav {
     border: 1px solid #10313e;
     border-radius: 20px;
@@ -390,10 +385,6 @@ nav li:hover {
 
     .desktop_nav {
         display: none;
-    }
-
-    nav img {
-        height: 70px;
     }
 
     header {

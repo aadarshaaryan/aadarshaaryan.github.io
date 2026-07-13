@@ -21,7 +21,7 @@
         <a href="{{ url_for('profile.users') }}">Users</a>
         <a href="{{ url_for('events.list_events') }}">Events</a>
         <a href="">Credentials</a>
-        <a href="{{ url_for('main.contacts') }}">Contact</a>
+        <a href="{{ url_for('main.contacts') }}">Contact Us</a>
 
         {% if session.get('username') %}
         <a href="{{ url_for('profile.profile', username=session['username']) }}">Profile</a>
@@ -45,7 +45,7 @@
                 <li class="desktop_nav"><a href="{{ url_for('profile.users') }}">Users</a></li>
                 <li class="desktop_nav"><a href="{{ url_for('events.list_events') }}">Events</a></li>
                 <li class="desktop_nav"><a href="">Credentials</a></li>
-                <li class="desktop_nav"><a href="{{ url_for('main.contacts') }}">Contact</a></li>
+                <li class="desktop_nav"><a href="{{ url_for('main.contacts') }}">Contact Us</a></li>
 
                 {% if session.get('is_admin') %}
                 <li>

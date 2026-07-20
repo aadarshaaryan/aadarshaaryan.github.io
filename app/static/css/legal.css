@@ -1,0 +1,94 @@
+/* Base Layout & Theme */
+body {
+    background-color: #0d0d0d;
+    color: #e2e8f0;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.7;
+}
+
+.legal-container {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+/* Glassmorphism Card Style */
+.legal-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(56, 189, 248, 0.1);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Typography */
+.legal-header h1 {
+    font-size: 2.2rem;
+    color: #ffffff;
+    margin-bottom: 5px;
+    letter-spacing: -0.05em;
+}
+
+.legal-meta {
+    font-size: 0.9rem;
+    color: #38BDF8;
+    margin-bottom: 40px;
+    font-family: monospace;
+}
+
+.legal-section {
+    margin-bottom: 35px;
+}
+
+.legal-section h3 {
+    font-size: 1.3rem;
+    color: #ffffff;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-left: 3px solid #38BDF8;
+    padding-left: 12px;
+}
+
+.legal-section p, .legal-section li {
+    color: #94A3B8;
+    font-size: 0.98rem;
+}
+
+.legal-section ul {
+    padding-left: 20px;
+    margin-top: 8px;
+}
+
+.legal-section li {
+    margin-bottom: 6px;
+}
+
+.legal-highlight {
+    color: #38BDF8;
+    font-weight: 600;
+}
+
+/* Footer Back Link */
+.legal-footer {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.btn-back {
+    color: #94A3B8;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.btn-back:hover {
+    color: #38BDF8;
+}
+
+@media (max-width: 768px) {
+    .legal-card {
+        padding: 25px;
+    }
+}

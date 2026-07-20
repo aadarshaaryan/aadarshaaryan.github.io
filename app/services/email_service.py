@@ -20,6 +20,10 @@ def send_email(to, subject, body):
         scopes=SCOPES,
     )
 
+    print("GMAIL_CLIENT_ID =", os.getenv("GMAIL_CLIENT_ID"))
+    print("GMAIL_CLIENT_SECRET =", os.getenv("GMAIL_CLIENT_SECRET"))
+    print("GMAIL_REFRESH_TOKEN =", os.getenv("GMAIL_REFRESH_TOKEN"))
+
     # Get fresh access token
     creds.refresh(Request())
 

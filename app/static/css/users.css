@@ -3,7 +3,8 @@
     max-width: 600px;
     margin: 0 auto;
     background: #000000;
-    border: 1px solid #202020; /* Subtle dark grey border instead of solid black */
+    border: 1px solid #202020;
+    /* Subtle dark grey border instead of solid black */
     border-radius: 8px;
     padding: 0;
     /* Removed overflow: hidden to allow the sticky element to float properly */
@@ -12,8 +13,10 @@
 /* Instagram Search Layout Header Bar Section */
 .insta-search-box {
     padding: 16px;
-    border-bottom: 1px solid #202020; /* Dark divider line */
-    background-color: #000000;       /* MATCH CONTAINER: Changed from #ffffff to pure black */
+    border-bottom: 1px solid #202020;
+    /* Dark divider line */
+    background-color: #000000;
+    /* MATCH CONTAINER: Changed from #ffffff to pure black */
     position: -webkit-sticky;
     position: sticky;
     top: 80;
@@ -30,11 +33,13 @@
 .search-input-wrapper input {
     width: 100%;
     padding: 10px 12px 10px 40px;
-    background-color: #121212; /* Dark input pill matching modern dark modes */
+    background-color: #121212;
+    /* Dark input pill matching modern dark modes */
     border: 1px solid #282828;
     border-radius: 8px;
     font-size: 0.95rem;
-    color: #ffffff;            /* White text for visibility */
+    color: #ffffff;
+    /* White text for visibility */
     outline: none;
     transition: all 0.2s ease;
 }
@@ -42,7 +47,8 @@
 /* Input text focus modifier state layout updates */
 .search-input-wrapper input:focus {
     background-color: #1a1a1a;
-    border: 1px solid #38BDF8; /* Accent light-blue focus ring */
+    border: 1px solid #38BDF8;
+    /* Accent light-blue focus ring */
 }
 
 /* Absolute centering icon mechanics */
@@ -70,12 +76,14 @@
     display: flex;
     align-items: center;
     padding: 12px 16px;
-    border-bottom: 1px solid #121212; /* Subtle layout rows division */
+    border-bottom: 1px solid #121212;
+    /* Subtle layout rows division */
     transition: background-color 0.15s ease;
 }
 
 .insta-row-link:hover .insta-row {
-    background-color: #0a0a0a; /* Sleek dark hover feedback tint */
+    background-color: #12181f;
+    /* Sleek dark hover feedback tint */
 }
 
 /* Left Column: Fixed Avatar Dimensioning metrics */
@@ -84,6 +92,9 @@
     height: 44px;
     margin-right: 14px;
     flex-shrink: 0;
+    position: relative;
+    /* This keeps the badge pinned to the avatar */
+    display: inline-block;
 }
 
 .insta-img {
@@ -145,6 +156,41 @@
     color: #6b6b6b;
     font-size: 0.9rem;
 }
+
+/* Badge Positioning */
+.rank-badge {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    border: 2px solid #000000;
+}
+
+/* Rank Colors */
+.rank-1 {
+    background-color: #FFD700;
+    color: #000;
+}
+
+/* Gold Crown */
+.rank-2 {
+    background-color: #C0C0C0;
+    color: #000;
+}
+
+/* Silver Star */
+.rank-3 {
+    background-color: #00FF87;
+    color: #000;
+}
+
+/* Green Star */
 
 @media (max-width: 768px) {
     .insta-search-box {

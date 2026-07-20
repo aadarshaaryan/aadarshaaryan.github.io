@@ -1,0 +1,86 @@
+{% extends "base/base.html" %}
+{% block content %}
+<div style="max-width: 1200px; margin: 40px auto; color: #fff; font-family: monospace; padding: 20px;">
+    <h2 style="color: #38BDF8;">// MANAGING: {{ event.title }}</h2>
+
+    <!-- TOGGLE BUTTON -->
+    <a href="{{ url_for('admin.dashboard') }}" style="color: #666; text-decoration: none; margin-left: 20px;">← Back</a>
+    <button id="toggle-edit" onclick="toggleEditMode()"
+        style="background: #333; color: #fff; border: none; padding: 8px 15px; cursor: pointer; position: relative; top: -30px; display: block; margin-left: auto;">
+        ENABLE EDIT MODE
+    </button>
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px; background: #050505;">
+        <thead>
+            <tr style="border-bottom: 1px solid #333; color: #888; text-align: left;">
+                <th style="padding: 12px;">Name</th>
+                <th style="padding: 12px;">Email</th>
+                <th style="padding: 12px;">Pos</th>
+                <th style="padding: 12px;">Team</th>
+                <th style="padding: 12px;">Leader Email</th>
+                <th style="padding: 12px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in results %}
+            <tr style="border-bottom: 1px solid #111;">
+                <td style="padding: 12px;">{{ r.participant_name }}</td>
+                <td style="padding: 12px; color: #666;">{{ r.participant_email }}</td>
+
+                <form action="{{ url_for('admin.update_result', result_id=r.id) }}" method="POST">
+                    <!-- VIEW MODE: Static text -->
+                    <!-- EDIT MODE: Input field (hidden by default) -->
+                    <td style="padding: 12px;">
+                        <span class="view-mode">{{ r.position or 0 }}</span>
+                        <input type="number" name="position" value="{{ r.position or 0 }}" class="edit-mode"
+                            style="display:none; width: 50px; background: #111; color: #fff; border: 1px solid #333; padding: 4px;">
+                    </td>
+                    <td style="padding: 12px;">
+                        <span class="view-mode">{{ r.team_name or '-' }}</span>
+                        <input type="text" name="team_name" value="{{ r.team_name or '' }}" class="edit-mode"
+                            style="display:none; width: 120px; background: #111; color: #fff; border: 1px solid #333; padding: 4px;">
+                    </td>
+                    <td style="padding: 12px;">
+                        <span class="view-mode">{{ r.team_leader_email or '-' }}</span>
+                        <input type="email" name="team_leader_email" value="{{ r.team_leader_email or '' }}"
+                            class="edit-mode"
+                            style="display:none; width: 150px; background: #111; color: #fff; border: 1px solid #333; padding: 4px;">
+                    </td>
+                    <td style="padding: 12px;">
+                        <button type="submit" class="edit-mode"
+                            style="display:none; background: #38BDF8; color: #000; border: none; padding: 4px 8px; cursor: pointer;">SAVE</button>
+                    </td>
+                </form>
+
+                <td style="padding: 12px;">
+                    {% if r.certificate_code %}
+                    <span style="color: #00FF87;">{{ r.certificate_code }}</span>
+                    {% else %}
+                    <form action="{{ url_for('admin.generate_certificate_code', result_id=r.id) }}" method="POST">
+                        <button type="submit"
+                            style="background: #00FF87; color: #000; border: none; padding: 4px 8px; cursor: pointer;">GENERATE</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function toggleEditMode() {
+        const editElements = document.querySelectorAll('.edit-mode');
+        const viewElements = document.querySelectorAll('.view-mode');
+        const btn = document.getElementById('toggle-edit');
+
+        const isEditing = editElements[0].style.display !== 'none';
+
+        editElements.forEach(el => el.style.display = isEditing ? 'none' : 'inline-block');
+        viewElements.forEach(el => el.style.display = isEditing ? 'inline' : 'none');
+
+        btn.innerText = isEditing ? 'ENABLE EDIT MODE' : 'DISABLE EDIT MODE';
+        btn.style.background = isEditing ? '#333' : '#c0392b';
+    }
+</script>
+{% endblock %}

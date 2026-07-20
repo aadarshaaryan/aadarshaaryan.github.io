@@ -3,7 +3,7 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: 2rem 1rem 5rem 1rem;
 }
 
 .profile-layout-grid {
@@ -242,9 +242,20 @@
     font-size: 1.35rem;
 }
 
-.icon-cyan { background: rgba(6, 182, 212, 0.1); color: #06b6d4; }
-.icon-indigo { background: rgba(99, 102, 241, 0.1); color: #6366f1; }
-.icon-emerald { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+.icon-cyan {
+    background: rgba(6, 182, 212, 0.1);
+    color: #06b6d4;
+}
+
+.icon-indigo {
+    background: rgba(99, 102, 241, 0.1);
+    color: #6366f1;
+}
+
+.icon-emerald {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
 
 .metric-number {
     font-size: 1.5rem;
@@ -263,6 +274,7 @@
 /* Portfolio Section Content Boxes Panels layout setup CSS rules */
 .content-showcase-box {
     min-height: 340px;
+    margin-bottom: 2rem;
 }
 
 .section-heading-title {
@@ -313,7 +325,7 @@
     color: #64748b;
 }
 
-.logout{
+.signout {
     height: 40px;
     width: 100px;
     background-color: rgb(146, 0, 0);
@@ -321,16 +333,10 @@
     color: white;
     border-radius: 8px;
     margin: 0 auto;
-}
-
-.logout a{
     display: flex;
     justify-content: center;
     align-items: center;
-    text-decoration: none;
-    color: inherit;
-    height: 100%;
-    width: 100%;
+    cursor: pointer;
 }
 
 /* Responsive Media Blueprint Breakdown Queries Layout adjustments */
@@ -338,7 +344,7 @@
     .profile-layout-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .profile-sidebar {
         position: static;
     }
@@ -349,4 +355,588 @@
         grid-template-columns: 1fr;
     }
 
+}
+
+/* ... [Previous CSS remains unchanged] ... */
+
+.credential-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(15, 23, 42, 0.6) !important;
+    border: 1px solid rgba(56, 189, 248, 0.1) !important;
+    padding: 1.5rem !important;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+}
+
+.credential-row:hover {
+    border-color: rgba(56, 189, 248, 0.4) !important;
+    transform: translateY(-2px);
+    background: rgba(15, 23, 42, 0.8) !important;
+}
+
+.participant-name {
+    font-size: 1.1rem;
+    color: #f8fafc;
+    margin-bottom: 0.5rem;
+}
+
+.detail-item {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin: 0.2rem 0;
+}
+
+.cert-meta {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Professionalized Buttons */
+.btn-download {
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+    color: #fff !important;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.2s;
+}
+
+.btn-download:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+}
+
+.btn-disabled {
+    background: rgba(148, 163, 184, 0.1);
+    color: #475569;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    cursor: not-allowed;
+}
+
+.cert-code {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin: 4px 0;
+}
+
+.edit-name-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.edit-name-form input {
+    background: #0b0f19;
+    border: 1px solid #334155;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.edit-name-form button {
+    background: #38BDF8;
+    color: #000;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
+.download-btn {
+    background: #00FF87;
+    color: #000;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.download-btn:hover {
+    opacity: 0.9;
+}
+
+.credentials-scroll-area {
+    max-height: 500px;
+    overflow-y: auto;
+    position: relative;
+    /* Keep this */
+    padding-right: 10px;
+    scrollbar-width: thin;
+}
+
+.btn-verified {
+    background: rgba(0, 255, 135, 0.1);
+    color: #00FF87;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(0, 255, 135, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: default;
+}
+
+/* Badge Styles */
+.profile-rank-badge,
+.owner-badge {
+    position: absolute;
+    top: 5px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    border: 3px solid #0f172a;
+    z-index: 100;
+}
+
+.profile-rank-badge {
+    left: 5px;
+}
+
+.owner-badge {
+    right: 5px;
+}
+
+/* Colors */
+.rank-1 {
+    background-color: #FFD700;
+    color: #000;
+}
+
+.rank-2 {
+    background-color: #C0C0C0;
+    color: #000;
+}
+
+.rank-3 {
+    background-color: #00FF87;
+    color: #000;
+}
+
+/* Info Button Styles */
+.info-section {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 8px;
+    margin-left: auto;
+}
+
+.info-btn {
+    background: none;
+    border: none;
+    color: #38BDF8;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+}
+
+.info-btn:hover {
+    color: #ffffff;
+}
+
+.hidden-info-box {
+    display: none;
+    margin-top: 15px;
+    padding: 1.2rem;
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 0.8rem;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    backdrop-filter: blur(5px);
+    position: absolute;
+    margin-top: 40px;
+}
+
+/* =================================================== */
+/* SCROLLABLE HORIZONTAL ACHIEVEMENT SYSTEM STYLES     */
+/* =================================================== */
+.achievements-showcase {
+    min-height: auto !important;
+}
+
+.section-subtitle-note {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: -1.5rem;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.achievements-scroll-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-height: 420px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.achievement-category-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.category-group-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-left: 2px solid #6366f1;
+    padding-left: 8px;
+}
+
+.achievements-horizontal-row {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding: 0.5rem 4px 1rem 4px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(99, 102, 241, 0.3) transparent;
+}
+
+/* Base Node Card Layout */
+.achievement-node-card {
+    flex: 0 0 110px;
+    max-width: 110px;
+    background: rgba(11, 15, 25, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 0.85rem;
+    padding: 1rem 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.achievement-node-card:hover {
+    transform: translateY(-4px);
+    border-color: #38bdf8;
+    background: rgba(15, 23, 42, 0.8);
+    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.15);
+}
+
+/* Vector Inline Sizing Frame Rules */
+.badge-icon-frame {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.achievement-vector-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.badge-node-name-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    line-clamp: 2;
+    line-height: 1.3;
+    height: 32px;
+}
+
+/* Locked Node Modifications styling constraints */
+.locked-state-node {
+    opacity: 0.45;
+    background: rgba(15, 23, 42, 0.3);
+    border-color: rgba(148, 163, 184, 0.05);
+}
+
+.locked-state-node:hover {
+    opacity: 0.8;
+    border-color: #64748b;
+    box-shadow: none;
+}
+
+.lock-indicator-badge {
+    font-size: 0.65rem;
+    color: #64748b;
+    font-weight: 500;
+    background: rgba(15, 23, 42, 0.8);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Bottom Dynamic Target Showcase Drawer Styling */
+.hidden-panel-drawer {
+    display: none;
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background: rgba(11, 15, 25, 0.8);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    animation: slideInDrawer 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.panel-drawer-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.panel-meta-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.panel-header-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.panel-badge-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f8fafc;
+}
+
+.status-pill {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+}
+
+.status-pill.unlocked {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.status-pill.locked {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.panel-badge-description {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    line-height: 1.4;
+}
+
+.panel-unlocked-timestamp {
+    font-size: 0.7rem;
+    color: #64748b;
+    font-style: italic;
+    margin-top: 2px;
+}
+
+.action-btn-share {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: #ffffff;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.action-btn-share:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Shared Deep-linked Badge Highlight Animation Frame Contexts */
+.shared-badge-highlight {
+    animation: pulseSharedNode 2s infinite ease-in-out;
+    border-color: #38bdf8 !important;
+}
+
+@keyframes slideInDrawer {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseSharedNode {
+    0% {
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(56, 189, 248, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+    }
+}
+
+/* Container box styled matching the glass-card profile system */
+.warning {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), #12181F, #12181F);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.15), 2px 2px 5px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-width: 360px;
+    width: 100%;
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: #e2e8f0;
+    font-family: monospace;
+    text-align: center;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin: 40px auto;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
+}
+
+.warning a{
+    text-decoration: none;
+    color: inherit;
+}
+
+/* The wrapper div around the two choice buttons */
+.warning > div {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Target individual interactive choice items ("Yes" and "No") */
+.warning > div > div {
+    flex: 1;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Left side option: "Yes" (Danger/Confirm Action) */
+.warning > div > div:first-child {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid #EF4444;
+    color: #FCA5A5;
+}
+
+.warning > div > div:first-child:hover {
+    background: #EF4444;
+    color: #000000;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+.warning > div > div:last-child {
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid #38BDF8;
+    color: #38BDF8;
+}
+
+.warning > div > div:last-child:hover {
+    background: #38BDF8;
+    color: #000000;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+@media (max-width: 640px) {
+    .panel-drawer-layout {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .action-btn-share {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .credential-row {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .metrics-counters-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .warning {
+        max-width: 90%;
+        padding: 1.25rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .warning > div {
+        gap: 10px;
+    }
+
+    .warning > div > div {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.8rem;
+    }
 }

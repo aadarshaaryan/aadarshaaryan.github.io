@@ -1,0 +1,57 @@
+.edit-profile-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.edit-card {
+    padding: 40px;
+}
+
+.form-section {
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    padding-bottom: 20px;
+}
+
+.form-section h3 {
+    color: #38bdf8;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.form-node {
+    margin-bottom: 15px;
+}
+
+.form-node label {
+    display: block;
+    color: #94a3b8;
+    font-size: 0.75rem;
+    margin-bottom: 5px;
+}
+
+.form-node input, .form-node textarea {
+    width: 100%;
+    background: #0b0f19;
+    border: 1px solid #334155;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.commit-btn {
+    width: 100%;
+    padding: 12px;
+    background: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.security-section {
+    border-top: 1px solid #ef4444; /* Subtle hint for security */
+}

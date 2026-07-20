@@ -1,0 +1,111 @@
+{% extends "base/base.html" %}
+{% block content %}
+<style>
+    /* Main wrapper to ensure responsiveness */
+    .verify-page-wrapper {
+        width: 90%;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #050505;
+        border: 1px solid #111;
+        border-radius: 8px;
+        font-family: monospace;
+        color: #fff;
+    }
+
+    /* Fixed responsive heading */
+    .verify-header {
+        color: #38BDF8;
+        font-size: 1.2rem;
+        /* Scaled down for mobile */
+        margin-top: 0;
+        margin-bottom: 20px;
+        word-break: break-all;
+    }
+
+    /* Flex form for responsiveness */
+    .verify-form {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #333;
+        padding-bottom: 20px;
+    }
+
+    @media (max-width: 480px) {
+        .verify-form {
+            flex-direction: column;
+        }
+
+        .verify-form input {
+            width: 100% !important;
+        }
+    }
+
+    .verify-form input {
+        flex: 1;
+        padding: 8px;
+        background: #111;
+        border: 1px solid #333;
+        color: #fff;
+    }
+
+    .verify-form button {
+        padding: 8px 16px;
+        background: #38BDF8;
+        color: #000;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+</style>
+
+<div class="verify-page-wrapper">
+    <h2 class="verify-header">// CERTIFICATE_VERIFICATION_TERMINAL</h2>
+
+    <form method="POST" class="verify-form">
+        <input value="{{cert_code or ''}}" type="text" name="cert_code" placeholder="Enter Certificate Code...">
+        <button type="submit">SEARCH</button>
+    </form>
+
+    {% if result %}
+    <div style="border: 1px solid #00FF87; padding: 20px; border-radius: 4px; word-wrap: break-word;">
+        <h2 style="color: #00FF87; margin-top: 0; font-size: 1.1rem;">✅ Certificate Verified</h2>
+        <p style="color: #ccc; font-size: 0.9rem;">This certificate is valid and was issued by Afflux.</p>
+
+        <hr style="border: 0; border-top: 1px solid #333; margin: 20px 0;">
+
+        <h3 style="color: #38BDF8; font-size: 1rem;">Certificate Details</h3>
+        <p><strong>Name:</strong> {{ result.participant_name }}</p>
+        <p><strong>Event:</strong> {{ result.event.title }}</p>
+        <p><strong>Position:</strong>
+            {% if result.position == 1 %}1st Place{% elif result.position == 2 %}2nd Place{% elif result.position == 3
+            %}3rd Place{% elif result.position == 0 %}Participant{% else %}{{ result.position }}th Place{% endif %}
+        </p>
+        <p><strong>Hosted By:</strong> Afflux</p>
+        <p><strong>Issued On:</strong> {{ result.submitted_at.strftime('%d %B %Y') }}</p>
+        <p><strong>Certificate Code:</strong> <span style="color: #00FF87;">{{ result.certificate_code }}</span></p>
+        {% if result.team_name %}<p><strong>Team:</strong> {{ result.team_name }}</p>{% endif %}
+    </div>
+    {% elif cert_code %}
+    <div style="padding: 20px; border: 1px solid #ef4444; color: #ef4444; text-align: center; border-radius: 4px;">
+        <h2 style="margin: 0;">✕ Invalid Certificate Code</h2>
+        <p>No records found for: <strong>{{ cert_code }}</strong></p>
+
+        <p style="margin-top: 20px; color: #ccc;">If you believe this is an error, please reach out to our team.</p>
+
+        <a href="{{ url_for('main.contacts') }}"
+            style="display: inline-block; margin-top: 10px; padding: 10px 20px; background: #ef4444; color: #fff; text-decoration: none; font-weight: bold; border-radius: 4px;">
+            CONTACT US
+        </a>
+    </div>
+    {% endif %}
+
+    <footer
+        style="text-align: center; color: #444; margin-top: 40px; font-size: 0.7rem; border-top: 1px solid #111; padding-top: 20px;">
+        Issued and Verified by Afflux
+    </footer>
+</div>
+{% endblock %}

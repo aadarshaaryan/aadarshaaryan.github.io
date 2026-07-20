@@ -1,63 +1,106 @@
-/* Custom Floating Toast Notifications[cite: 6] */
+/* Custom Floating Toast Notifications */
 .msg_wrapper {
-    display: flex; /*[cite: 6] */
+    display: flex;
+    /* */
     flex-direction: column;
-    justify-content: center; /*[cite: 6] */
-    align-items: center; /*[cite: 6] */
+    justify-content: flex-start;
+    /* Changed from center to keep scrolling behavior stable */
+    align-items: center;
+    /* */
     position: fixed;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 2000; /*[cite: 6] */
+    z-index: 2000;
+    /* */
     gap: 10px;
+
+    /* The Fix for Screen Flooding */
+    max-height: 70vh;
+    /* Prevents notifications from taking over more than 70% of the viewport */
+    overflow-y: auto;
+    /* Allows scrolling if too many alerts stack up */
+    pointer-events: none;
+    /* Allows users to click dashboard elements behind the invisible wrapper layer */
+    padding: 5px;
+    /* Tiny padding buffer so box-shadows don't get clipped while scrolling */
+}
+
+/* Hide scrollbars for a clean terminal look, while maintaining scroll functionality */
+.msg_wrapper::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }
 
 .notify {
-    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2), 2.5px 2.5px 5px #38BDF8; /*[cite: 6] */
-    background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), #12181F, #12181F); /*[cite: 6] */
+    pointer-events: auto;
+    /* Re-enables clicking notifications directly if needed */
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2), 2.5px 2.5px 5px #38BDF8;
+    /* */
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), #12181F, #12181F);
+    /* */
     border: 1px solid rgba(56, 189, 248, 0.2);
-    backdrop-filter: blur(8px); /*[cite: 6] */
-    -webkit-backdrop-filter: blur(8px); /*[cite: 6] */
+    backdrop-filter: blur(8px);
+    /* */
+    -webkit-backdrop-filter: blur(8px);
+    /* */
     min-height: 50px;
     max-width: 340px;
-    min-width: 320px; /*[cite: 6] */
+    min-width: 320px;
+    /* */
+    /* Keeps it perfectly safe on ultra-narrow devices */
+    max-width: calc(100vw - 40px);
     border-radius: 12px;
     padding: 0.75rem 1.25rem;
-    text-align: center; /*[cite: 6] */
-    display: flex; /*[cite: 6] */
-    align-items: center; /*[cite: 6] */
-    justify-content: center; /*[cite: 6] */
+    text-align: center;
+    /* */
+    display: flex;
+    /* */
+    align-items: center;
+    /* */
+    justify-content: center;
+    /* */
     color: #e2e8f0;
     font-size: 0.9rem;
     font-weight: 500;
+    flex-shrink: 0;
+    /* Prevents the cards from getting squished inside the scrolling container */
 }
 
 .notify_come {
-    animation: notification_come 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; /*[cite: 6] */
+    animation: notification_come 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    /* */
 }
 
 .notify_go {
-    animation: notification_go 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; /*[cite: 6] */
+    animation: notification_go 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    /* */
 }
 
 @keyframes notification_come {
     from {
-        opacity: 0; /*[cite: 6] */
+        opacity: 0;
+        /* */
         transform: translateY(-20px) scale(0.95);
     }
+
     to {
-        opacity: 1; /*[cite: 6] */
+        opacity: 1;
+        /* */
         transform: translateY(0) scale(1);
     }
 }
 
 @keyframes notification_go {
     from {
-        opacity: 1; /*[cite: 6] */
+        opacity: 1;
+        /* */
         transform: translateY(0) scale(1);
     }
+
     to {
-        opacity: 0; /*[cite: 6] */
+        opacity: 0;
+        /* */
         transform: translateY(-20px) scale(0.95);
     }
 }

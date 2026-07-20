@@ -1,0 +1,77 @@
+{% extends "base/base.html" %}
+
+{% block title %}Terms of Service | Afflux{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/legal.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="legal-container">
+    <main class="legal-card">
+        <section class="legal-header">
+            <h1>// TERMS OF SERVICE</h1>
+            <p class="legal-meta">Last Updated: July 18, 2026</p>
+        </section>
+
+        <section class="legal-section">
+            <p>By registering an account or interacting with the Afflux platform, you explicitly consent to abide by
+                these operating Terms of Service.</p>
+        </section>
+
+        <section class="legal-section">
+            <h3>1. Account Security Responsibility</h3>
+            <p>Users are exclusively liable for safeguarding access tokens, local session data, and login
+                credentials. Any system behavior or input configurations stemming from your authenticated
+                session fall under your direct personal responsibility.</p>
+        </section>
+
+        <section class="legal-section">
+            <h3>2. Gamification Rules & System Ties</h3>
+            <p>XP values, Levels, badges, and automated sign-in systems are configured purely for progress transparency
+                and fair validation.</p>
+            <ul>
+                <li><span class="legal-highlight">Leaderboard Ordering:</span> Rankings sort primarily by highest Level,
+                    followed by total XP count.</li>
+                <li><span class="legal-highlight">Tie-Breakers:</span> If level and XP scores are identical, the system
+                    defaults to the earlier platform registration timestamp to determine rank placement.</li>
+                <li><span class="legal-highlight">System Audits:</span> Afflux maintains total jurisdiction to correct
+                    erroneous allocations, balance exploitation paths, or revoke scores gained via unnatural mechanics
+                    or framework manipulation.</li>
+            </ul>
+        </section>
+
+        <section class="legal-section">
+            <h3>3. Certificate Integrity & Abuse</h3>
+            <p>Digital credentials issued by Afflux carry dedicated cryptographic validation codes. Forging
+                information, exploiting submission pipelines to obtain unearned status, or intentionally misrepresenting
+                credential validity will lead to immediate account suspension and blacklisting.</p>
+        </section>
+
+        <section class="legal-section">
+            <h3>4. Fair Platform Usage Limits</h3>
+            <p>You agree not to bypass standard operation flows, automate entry endpoints, submit malicious scripts,
+                input intentionally malformed URLs into profile slots, or disrupt platform database servers.
+            </p>
+        </section>
+
+        <section class="legal-section">
+            <h3>5. MVP Status & Liability</h3>
+            <p>Afflux operates strictly on an "as-is" and "as-available" architecture baseline. We provide no guarantee
+                against occasional server interruptions, temporary data synchronization delays, or structural
+                adjustments during active application updates.</p>
+        </section>
+
+        <section class="legal-section">
+            <h3>6. Modifications to Terms</h3>
+            <p>We preserve full clearance parameters to adjust these operating rules periodically. Your sustained usage
+                of platform assets post-publication represents unified compliance with updated guidelines.</p>
+        </section>
+
+        <footer class="legal-footer">
+            <a href="{{ url_for('main.home') }}" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Return to
+                Home</a>
+        </footer>
+    </main>
+</div>
+{% endblock %}

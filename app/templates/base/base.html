@@ -15,50 +15,51 @@
 </head>
 
 <body>
+
+    <div id="global-page-loader" class="global-loader-overlay">
+        <div class="loader-content-box">
+            <div class="loader-spinner"></div>
+            <p class="loader-text">please wait...</p>
+        </div>
+    </div>
+
     <div id="mobile-menu" class="mobile-menu">
         <button id="sidebar-close" class="sidebar-close-btn">&times;</button>
-
-        <a href="{{ url_for('profile.users') }}">Users</a>
-        <a href="{{ url_for('events.list_events') }}">Events</a>
-        <a href="">Credentials</a>
         <a href="{{ url_for('main.contacts') }}">Contact Us</a>
-
-        {% if session.get('username') %}
-        <a href="{{ url_for('profile.profile', username=session['username']) }}">Profile</a>
-        <a href="{{ url_for('auth.signout') }}">Sign Out</a>
-        {% else %}
-        <a href="{{ url_for('auth.signin') }}">Sign In</a>
-        {% endif %}
     </div>
 
     <header>
         <nav>
             <ul>
-                <li>
+                <li class="">
                     <a href="{{ url_for('main.home') }}">
-                            <img src="{{ url_for('static', filename='images/afflux_logo.svg') }}" class="logo" alt="Afflux logo">
+                        <img src="{{ url_for('static', filename='images/afflux_logo.svg') }}" class="logo"
+                            alt="Afflux logo">
                     </a>
                 </li>
                 <li><a href="{{ url_for('main.home') }}">Home</a></li>
-                <li class="desktop_nav"><a href="{{ url_for('profile.users') }}">Users</a></li>
-                <li class="desktop_nav"><a href="{{ url_for('events.list_events') }}">Events</a></li>
-                <li class="desktop_nav"><a href="">Credentials</a></li>
-                <li class="desktop_nav"><a href="{{ url_for('main.contacts') }}">Contact Us</a></li>
+                <li class="desktop_nav "><a href="{{ url_for('profile.users') }}">Users</a></li>
+                <li class="desktop_nav "><a href="{{ url_for('events.list_events') }}">Events</a></li>
+                <li class="desktop_nav "><a href="{{ url_for('certificates.verify_certificate') }}">Credentials</a></li>
+                <li class="desktop_nav "><a href="{{ url_for('profile.leaderboard') }}">Leaderboard</a></li>
+                <li class="desktop_nav "><a href="{{ url_for('main.contacts') }}">Contact Us</a></li>
 
-                {% if session.get('is_admin') %}
-                <li>
+                {% if current_user.is_authenticated and current_user.is_admin %}
+                <li class="">
                     <a href="{{ url_for('admin.dashboard') }}" class="admin-link"
                         style="color: #38BDF8; font-family: monospace;">// ADMIN_CORE
                     </a>
                 </li>
                 {% endif %}
 
-                {% if session.get('username') %}
-                <li>
-                    <a href="{{ url_for('profile.profile', username=session['username']) }}">Profile</a>
+                {% if current_user.is_authenticated %}
+                <li class="">
+                    <a href="{{ url_for('profile.profile', username=current_user.username) }}" style=" font-weight:
+                        bolder; color: aqua;">Profile</a>
                 </li>
                 {% else %}
-                <li><a href="{{ url_for('auth.signin') }}">Sign in</a></li>
+                <li class=""><a href="{{ url_for('auth.signin') }}" style="font-weight: bolder; color: aqua;">Sign
+                        in</a></li>
                 {% endif %}
 
                 <li class="mobile_nav">
@@ -77,8 +78,8 @@
 
         <div class="bottom-nav-w">
             <div class="bottom-nav">
-                {% if session.get('username') %}
-                <a href="{{ url_for('profile.profile', username=session['username']) }}"
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('profile.profile', username=current_user.username) }}"
                     class="bottom-nav-items hidden">
                     <i class="fa-solid fa-user-shield"></i>
                 </a>
@@ -87,13 +88,13 @@
                     <i class="fa-solid fa-user-shield"></i>
                 </a>
                 {% endif %}
-                <a href="/users" class="bottom-nav-items hidden">
+                <a href="{{ url_for('profile.users') }}" class="bottom-nav-items hidden">
                     <i class="fa-solid fa-users"></i>
                 </a>
-                <a href="" class="bottom-nav-items hidden">
+                <a href="{{ url_for('profile.leaderboard') }}" class="bottom-nav-items hidden">
                     <i class="fa-solid fa-ranking-star"></i>
                 </a>
-                <a href="/events" class="bottom-nav-items hidden">
+                <a href="{{ url_for('events.list_events') }}" class="bottom-nav-items hidden">
                     <i class="fa-solid fa-calendar-day"></i>
                 </a>
                 <a class="bottom-nav-items last_main_nav">
@@ -104,56 +105,9 @@
 
     </main>
 
-    <footer class="terminal-footer">
-        <div class="footer-wrapper">
-            <div class="footer-upper">
-                <div class="footer-brand-node">
-                    <div class="footer-status-indicator">
-                        <div class="pulse-dot"></div>
-                        <span>SYSTEMS ACTIVE // 2026</span>
-                    </div>
-                    <p class="footer-tagline">
-                        Building robust full-stack software nodes, AI execution systems, and highly collaborative
-                        open-source community layers.
-                    </p>
-                </div>
+    {% block footer %}{% endblock %}
 
-                <div class="footer-links-group">
-                    <div>
-                        <h4 class="footer-column-title">// Network Links</h4>
-                        <ul class="footer-comms-list"
-                            style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start;">
-                            <li><a href="https://github.com/your-github-username" target="_blank"
-                                    rel="noopener">GitHub</a></li>
-                            <li><a href="https://www.linkedin.com/in/aadarsh-kumar-329308415/" target="_blank"
-                                    rel="noopener">LinkedIn</a></li>
-                            <li><a href="https://instagram.com/aadarshaaryan.official" target="_blank"
-                                    rel="noopener">Instagram</a></li>
-                            <li><a href="https://wa.me/9473494484" target="_blank" rel="noopener">WhatsApp</a></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h4 class="footer-column-title">// Navigation</h4>
-                        <ul class="footer-comms-list"
-                            style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-start;">
-                            <li><a href="{{ url_for('auth.signin') }}">Sign in</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-lower">
-                <div class="footer-copyright">
-                    &copy; 2026 AADARSH AARYAN. ALL RIGHTS RESERVED. RUNNING STABLE_V2.4
-                </div>
-                <div class="footer-legal-nodes">
-                    <a href="#">/PRIVACY_POLICY</a>
-                    <a href="#">/TERMS_OF_SERVICE</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div class="last_space"></div>
 
     <div class="msg_wrapper">
         {% with messages = get_flashed_messages() %}

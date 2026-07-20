@@ -1,0 +1,137 @@
+{% extends "base/base.html" %}
+{% block title %}Edit Profile | Afflux{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/edit_profile.css') }}?v=1.0">
+{% endblock %}
+
+{% block content %}
+<div class="edit-profile-container">
+    <div class="glass-card edit-card">
+        <h2>// EDIT_PROFILE_NODE</h2>
+
+        <!-- ENCTYPE added to enable file data transmission streams -->
+        <form action="{{ url_for('profile.edit_profile') }}" method="POST" enctype="multipart/form-data">
+
+            <!-- Profile Avatar Upload Section -->
+            <!-- Profile Avatar Upload Section -->
+            <div class="form-section avatar-upload-section"
+                style="display: flex; align-items: center; gap: 20px; padding-bottom: 20px; border-bottom: 1px dashed rgba(255,255,255,0.1); margin-bottom: 20px;">
+                <div class="current-avatar-preview" id="avatar-preview-container">
+                    {% if current_user.profile_pic %}
+                    <img id="avatar-preview-img" src="{{ current_user.profile_pic }}" alt="Avatar"
+                        style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-blue, #38BDF8);">
+                    {% else %}
+                    <!-- If no image exists yet, we provide an empty image element hidden by default alongside the letter fallback -->
+                    <img id="avatar-preview-img" src="" alt="Avatar"
+                        style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-blue, #38BDF8); display: none;">
+                    <div id="avatar-placeholder-fallback"
+                        style="width: 80px; height: 80px; border-radius: 50%; background: #242b35; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--accent-blue, #38BDF8); border: 2px dashed rgba(255,255,255,0.2);">
+                        {{ current_user.username[:2].upper() }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="form-node" style="flex-grow: 1; margin: 0;">
+                    <label style="display: block; margin-bottom: 5px;">Update Profile Avatar</label>
+                    <!-- Added id="avatar-input" for script targeting -->
+                    <input type="file" id="avatar-input" name="profile_pic" accept="image/*"
+                        style="border: none; background: transparent; padding: 0; color: #8892b0;">
+
+                    <!-- Live status feedback container -->
+                    <div id="upload-status-message"
+                        style="font-size: 0.8rem; margin-top: 6px; font-weight: 500; transition: all 0.2s ease;"></div>
+                </div>
+            </div>
+
+            <!-- Profile Details -->
+            <div class="form-section">
+                <h3>General Info</h3>
+                <div class="form-node">
+                    <label>Display Name</label>
+                    <input type="text" name="name"
+                        value="{{ form_data.name if form_data else target_user.name or '' }}">
+                </div>
+                <div class="form-node">
+                    <label>Bio Summary</label>
+                    <textarea name="bio">{{ form_data.bio if form_data else target_user.bio or '' }}</textarea>
+                </div>
+            </div>
+
+            <!-- Socials -->
+            <div class="form-section">
+                <h3>Social Links</h3>
+                <div class="form-node">
+                    <input type="url" name="github" placeholder="GitHub URL"
+                        value="{{ form_data.github if form_data else target_user.github or '' }}">
+                </div>
+                <div class="form-node">
+                    <input type="url" name="linkedin" placeholder="LinkedIn URL"
+                        value="{{ form_data.linkedin if form_data else target_user.linkedin or '' }}">
+                </div>
+                <div class="form-node">
+                    <input type="url" name="website" placeholder="Website URL"
+                        value="{{ form_data.website if form_data else target_user.website or '' }}">
+                </div>
+                <div class="form-node">
+                    <input type="url" name="instagram" placeholder="Instagram URL"
+                        value="{{ form_data.instagram if form_data else target_user.instagram or '' }}">
+                </div>
+                <div class="form-node">
+                    <input type="url" name="youtube" placeholder="YouTube URL"
+                        value="{{ form_data.youtube if form_data else target_user.youtube or '' }}">
+                </div>
+            </div>
+
+            <!-- Security: Change Password -->
+            <div class="form-section security-section">
+                <h3>Security</h3>
+                <div class="form-node">
+                    <label>New Password</label>
+                    <input type="password" name="new_password" placeholder="Leave blank to keep current">
+                </div>
+                <div class="form-node">
+                    <label>Confirm New Password</label>
+                    <input type="password" name="confirm_password">
+                </div>
+            </div>
+
+            <button type="submit" class="commit-btn">COMMIT_CHANGES</button>
+        </form>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const avatarInput = document.getElementById('avatar-input');
+        const statusMsg = document.getElementById('upload-status-message');
+        const previewImg = document.getElementById('avatar-preview-img');
+        const fallbackPlaceholder = document.getElementById('avatar-placeholder-fallback');
+
+        if (avatarInput && statusMsg) {
+            avatarInput.addEventListener('change', function () {
+                if (this.files && this.files.length > 0) {
+                    const selectedFile = this.files[0];
+
+                    // 1. Update status text
+                    statusMsg.style.color = "#4ADE80";
+                    statusMsg.innerHTML = `<i class="fa-solid fa-circle-check"></i> Image selected, commit changes to save.`;
+
+                    // 2. Read file local memory data stream and update visual circle asset frame
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        if (previewImg) {
+                            previewImg.src = e.target.result;
+                            previewImg.style.display = "block"; // Ensure it is visible
+                        }
+                        if (fallbackPlaceholder) {
+                            fallbackPlaceholder.style.display = "none"; // Hide text placeholder if it was there
+                        }
+                    };
+                    reader.readAsDataURL(selectedFile);
+
+                } else {
+                    statusMsg.innerHTML = "";
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

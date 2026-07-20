@@ -1,5 +1,4 @@
-from flask import Blueprint, render_template, redirect, flash, url_for, jsonify
-import sqlite3
+from flask import Blueprint, render_template
 
 main_bp = Blueprint("main", __name__)
 DB_NAME = "database.db"
@@ -12,6 +11,12 @@ def home():
 def contacts():
     return render_template('navs/contacts.html')
 
-@main_bp.route('/unavaialable-user')
-def unavailable_user():
-    return render_template('extra/blocked_user.html')
+@main_bp.route("/privacy-policy")
+def privacy_policy():
+    """Renders the enhanced platform privacy terms."""
+    return render_template("legal/privacy.html")
+
+@main_bp.route("/terms-of-service")
+def terms_of_service():
+    """Renders the updated platform usage guidelines and leaderboard rules."""
+    return render_template("legal/terms.html")

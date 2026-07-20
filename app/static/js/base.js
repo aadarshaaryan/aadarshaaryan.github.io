@@ -33,35 +33,21 @@ document.addEventListener("click", function (e) {
     }
 });
 
-// Mobile bottom slider layout toggle
-var swiped = false;
-var last_main_nav = document.querySelector(".last_main_nav"); // Targeted using class assigned in HTML
-var mobile_nav = document.querySelector(".bottom-nav");
-var hiddenLinks = document.querySelectorAll(".bottom-nav-items.hidden");
+// 1. Triggers loader during standard page navigation leaves
+window.addEventListener('beforeunload', function () {
+    document.getElementById('global-page-loader').classList.add('loader-active');
+});
 
-function swipe_left() {
-    if (!last_main_nav || !mobile_nav) {
-        return;
+// 2. Clear loader if the page is pulled out of the Back-Forward Cache (bfcache)
+window.addEventListener('pageshow', function (event) {
+    if (event.persisted) {
+        document.getElementById('global-page-loader').classList.remove('loader-active');
     }
+});
 
-    last_main_nav.addEventListener("click", function () {
-        // Toggle the rotation class smoothly
-        last_main_nav.classList.toggle("rotated");
-
-        // Toggle the visibility of the hidden items
-        hiddenLinks.forEach(function (link) {
-            link.classList.toggle("hidden-item");
-        });
-
-        // Handle the container shrinking logic seamlessly
-        if (!swiped) {
-            mobile_nav.classList.add("is-shrunk");
-            swiped = true;
-        } else {
-            mobile_nav.classList.remove("is-shrunk");
-            swiped = false;
-        }
+// 3. Triggers loader during form processing pipelines
+document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', function () {
+        document.getElementById('global-page-loader').classList.add('loader-active');
     });
-}
-
-swipe_left();
+});

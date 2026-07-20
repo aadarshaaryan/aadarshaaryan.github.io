@@ -3,10 +3,13 @@
 {% block title %}{{ target_user.name or target_user.username }}'s Profile | Afflux{% endblock %}
 
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}?v=1.4">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}?v=1.5">
 {% endblock %}
 
 {% block content %}
+{# Define is_owner using Flask-Login current_user #}
+{% set is_owner = current_user.is_authenticated and current_user.id == target_user.id %}
+
 <div class="profile-dashboard-container">
     <main class="profile-layout-grid">
 
@@ -16,112 +19,105 @@
                     <img class="user-avatar"
                         src="{{ target_user.profile_pic or 'https://api.dicebear.com/7.x/bottts/svg?seed=' ~ target_user.username }}"
                         alt="{{ target_user.username }}'s Avatar">
-                    {% if is_owner %}
-                    <span class="edit-avatar-badge" title="Change Profile Picture">
-                        <i class="fa-solid fa-camera"></i>
-                    </span>
-                    {% endif %}
-                </div>
 
+                    {# New Ranking Logic #}
+                    {% if target_user.id|int in top_three_ids|map('int') %}
+                    {% set index = top_three_ids.index(target_user.id) %}
+                    <div
+                        class="{% if is_owner %}owner-badge{% else %}profile-rank-badge{% endif %} rank-{{ index + 1 }}">
+                        {% if index == 0 %}<i class="fa-solid fa-crown"></i>
+                        {% else %}<i class="fa-solid fa-star"></i>{% endif %}
+                    </div>
+                    {% endif %}
+
+                </div>
                 <div class="identity-meta">
                     <h2 class="display-name">{{ target_user.name or target_user.username }}</h2>
                     <p class="user-handle">u/{{ target_user.username }}</p>
                 </div>
-
                 <div class="gamification-status-box">
                     <div class="level-badge-row">
                         <span class="lvl-text">LEVEL</span>
                         <span class="lvl-number">{{ target_user.level }}</span>
+                        <div class="info-section">
+                            <button class="info-btn" onclick="toggleInfo('profileInfoBox')">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </button>
+                        </div>
+
+                        <div id="profileInfoBox" class="hidden-info-box">
+                            <strong>Leveling Up at Afflux</strong>
+                            <ul style="margin: 10px 0; padding-left: 20px;">
+                                <li><strong>Earn XP</strong>: Participate in events, complete challenges, update your
+                                    profile, and claim daily sign-ins.</li>
+                                <li><strong>Bonus Milestones</strong>: Earn extra XP bonuses on your 7th and 30th total
+                                    sign-ins.</li>
+                                <li><strong>Levels</strong>: Accumulate XP to level up and unlock future platform perks
+                                    and prestige.</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="exp-track-container">
                         <div class="exp-text-metrics">
-                            <span>EXP Progress</span>
-                            <span>{{ target_user.exp }} XP</span>
+                            <span>xp Progress</span>
+                            <span>{{ target_user.xp }}xp</span>
                         </div>
                         <div class="exp-progress-track">
-                            {% set exp_width = (target_user.exp % 100) if target_user.exp is not none else 0 %}
+                            {# Define exp_width using target_user.progress_percentage #}
+                            {% set exp_width = target_user.progress_percentage or 0 %}
                             <div class="exp-progress-fill" style="--exp-width: {{ exp_width }}%;"></div>
                         </div>
-
                     </div>
                 </div>
-
                 <div class="bio-section">
-                    {% if target_user.bio %}
-                    <p class="bio-text">{{ target_user.bio }}</p>
-                    {% else %}
-                    <p class="bio-text placeholder-text">No custom bio summary written yet.</p>
-                    {% endif %}
+                    {% if target_user.bio %}<p class="bio-text">{{ target_user.bio }}</p>{% else %}<p
+                        class="bio-text placeholder-text">No custom bio summary written yet.</p>{% endif %}
                 </div>
-
                 <div class="social-links-grid">
-                    {% if target_user.github %}
-                    <a href="{{ target_user.github }}" target="_blank" class="social-icon" aria-label="GitHub"><i
-                            class="fa-brands fa-github"></i></a>
-                    {% endif %}
-                    {% if target_user.linkedin %}
-                    <a href="{{ target_user.linkedin }}" target="_blank" class="social-icon" aria-label="LinkedIn"><i
-                            class="fa-brands fa-linkedin"></i></a>
-                    {% endif %}
-                    {% if target_user.website %}
-                    <a href="{{ target_user.website }}" target="_blank" class="social-icon" aria-label="Website"><i
-                            class="fa-solid fa-globe"></i></a>
-                    {% endif %}
-                    {% if target_user.instagram %}
-                    <a href="{{ target_user.instagram }}" target="_blank" class="social-icon" aria-label="Instagram"><i
-                            class="fa-brands fa-instagram"></i></a>
-                    {% endif %}
-                    {% if target_user.youtube %}
-                    <a href="{{ target_user.youtube }}" target="_blank" class="social-icon" aria-label="YouTube"><i
-                            class="fa-brands fa-youtube"></i></a>
-                    {% endif %}
+                    {% if target_user.github %}<a href="{{ target_user.github }}" target="_blank" class="social-icon"
+                        aria-label="GitHub"><i class="fa-brands fa-github"></i></a>{% endif %}
+                    {% if target_user.linkedin %}<a href="{{ target_user.linkedin }}" target="_blank"
+                        class="social-icon" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>{% endif %}
+                    {% if target_user.website %}<a href="{{ target_user.website }}" target="_blank" class="social-icon"
+                        aria-label="Website"><i class="fa-solid fa-globe"></i></a>{% endif %}
+                    {% if target_user.instagram %}<a href="{{ target_user.instagram }}" target="_blank"
+                        class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>{% endif %}
+                    {% if target_user.youtube %}<a href="{{ target_user.youtube }}" target="_blank" class="social-icon"
+                        aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>{% endif %}
                 </div>
-
                 {% if is_owner %}
-                <div class="card-actions-wrapper">
-                    <a href="#" class="btn btn-outline-edit">
-                        <i class="fa-solid fa-user-gear"></i> Edit Profile Settings
-                    </a>
+                <div class="card-actions-wrapper"><a href="{{ url_for('profile.edit_profile') }}"
+                        class="btn btn-outline-edit"><i class="fa-solid fa-user-gear"></i> Edit Profile Settings</a>
                 </div>
                 {% else %}
-                <div class="card-actions-wrapper">
-                    <a href="#" class="btn btn-outline-edit">
-                        <i class="fa-solid fa-user-gear"></i> Check your level
-                    </a>
-                </div>
+                <div class="card-actions-wrapper"><a href="{{ url_for('auth.signin') }}" class="btn btn-outline-edit"><i
+                            class="fa-solid fa-user-gear"></i> Check your level</a></div>
                 {% endif %}
             </div>
+
         </aside>
 
-        <section class="profile-main-content">
 
+        <section class="profile-main-content">
             <div class="metrics-counters-grid">
                 <div class="glass-card metric-counter-card">
-                    <div class="metric-icon icon-cyan">
-                        <i class="fa-solid fa-gamepad"></i>
-                    </div>
+                    <div class="metric-icon icon-cyan"><i class="fa-solid fa-gamepad"></i></div>
                     <div class="metric-data">
-                        <h3 class="metric-number">{{ target_user.events_participated }}</h3>
+                        <h3 class="metric-number">{{ events_count }}</h3>
                         <p class="metric-title">Events Joined</p>
                     </div>
                 </div>
-
                 <div class="glass-card metric-counter-card">
-                    <div class="metric-icon icon-indigo">
-                        <i class="fa-solid fa-trophy"></i>
-                    </div>
+                    <div class="metric-icon icon-indigo"><i class="fa-solid fa-trophy"></i></div>
                     <div class="metric-data">
-                        <h3 class="metric-number">{{ target_user.events_won }}</h3>
-                        <p class="metric-title">Events Won</p>
+                        <h3 class="metric-number">{{ unlocked_count }}</h3>
+                        <p class="metric-title">Achievements Won</p>
                     </div>
                 </div>
-
                 <div class="glass-card metric-counter-card">
-                    <div class="metric-icon icon-emerald">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
+                    <div class="metric-icon icon-emerald"><i class="fa-solid fa-shield-halved"></i></div>
                     <div class="metric-data">
-                        <h3 class="metric-number">{{ target_user.certificates_count }}</h3>
+                        <h3 class="metric-number">{{ certs_count }}</h3>
                         <p class="metric-title">Certificates Earned</p>
                     </div>
                 </div>
@@ -129,25 +125,288 @@
 
             <div class="glass-card content-showcase-box">
                 <div class="showcase-header">
-                    <h3 class="section-heading-title">// Verified Credentials & Achievements</h3>
+                    <h3 class="section-heading-title">Earned Certificates</h3>
                 </div>
 
-                <div class="empty-showcase-state">
-                    <div class="radar-ping-icon">
-                        <i class="fa-solid fa-graduation-cap"></i>
+                <div class="credentials-scroll-area">
+                    {% if not target_user.event_results %}
+                    <p style="font-weight: bolder;">No certificates yet.</p>
+                    {% if is_owner %}
+                    <p>
+                        Participate in Afflux <a href="/events" style="color: #38BDF8;">events</a> to earn and showcase
+                        your achievements.
+                    </p>
+                    {% endif %}
+                    {% endif %}
+
+                    {% for res in target_user.event_results %}
+                    <div class="credential-row glass-card">
+                        <div class="credential-details">
+                            {% if is_owner %}
+                            <form action="{{ url_for('profile.update_participation', result_id=res.id) }}" method="POST"
+                                class="edit-name-form">
+                                <input type="text" name="participant_name" value="{{ res.participant_name }}"
+                                    class="edit-input">
+                                <button type="submit" class="save-btn"><i class="fa-solid fa-check"></i></button>
+                            </form>
+                            {% else %}
+                            <h4 class="participant-name">{{ res.participant_name }}</h4>
+                            {% endif %}
+
+                            <p class="detail-item"><strong>Event:</strong> {{ res.event.title }}</p>
+                            <p class="detail-item"><strong>Issued:</strong> {{ res.submitted_at.strftime('%B %d, %Y') }}
+                            </p>
+
+                            <p class="cert-meta">
+                                Code: {{ res.certificate_code or 'N/A' }}
+                                {% if res.position and res.position > 0 %} | Rank: {{ res.position }}{% endif %}
+                            </p>
+                        </div>
+
+                        <div class="credential-action">
+                            {% if res.certificate_code %}
+                            {% if is_owner %}
+                            <a href="{{ url_for('certificates.download_my_certificate', cert_code=res.certificate_code) }}"
+                                class="btn-download" title="Download your certificate">
+                                <i class="fa-solid fa-download"></i> Download
+                            </a>
+                            {% else %}
+                            <span class="btn-verified" title="This credential is verified by Afflux">
+                                <i class="fa-solid fa-check-circle"></i> Verified
+                            </span>
+                            {% endif %}
+                            {% elif res.position == 0 %}
+                            <span class="btn-disabled" title="Criteria not met">Not Awarded</span>
+                            {% else %}
+                            <span class="btn-pending" title="Awaiting generation">Processing</span>
+                            {% endif %}
+                        </div>
                     </div>
-                    <h4>No Credentials Attached</h4>
-                    <p>Verified certificates, badges, and hackathon wins linked to this developer's record account will
-                        appear listed right here.</p>
+                    {% endfor %}
                 </div>
             </div>
 
+            <div class="glass-card content-showcase-box achievements-showcase">
+                <div class="showcase-header">
+                    <h3 class="section-heading-title">Platform Achievements</h3>
+                    <p class="section-subtitle-note">💡 Click an achievement card below to view details or share with
+                        friends</p>
+                </div>
+
+                <!-- Hidden Detail Reveal Showcase Panel Target Footer Drawer -->
+                <div id="achievement-details-panel" class="hidden-panel-drawer" style="display: none;">
+                    <div class="panel-drawer-layout">
+                        <div class="panel-meta-content">
+                            <div class="panel-header-badge-row">
+                                <h4 id="panel-title" class="panel-badge-title"></h4>
+                                <span id="panel-status-pill" class="status-pill"></span>
+                            </div>
+                            <p id="panel-desc" class="panel-badge-description"></p>
+                            <p id="panel-timestamp" class="panel-unlocked-timestamp"></p>
+                        </div>
+                        <div class="panel-action-trigger">
+                            <button id="panel-share-btn" class="action-btn-share" title="Copy Share URL Path">
+                                <i class="fa-solid fa-share-nodes"></i> Copy Share Link
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievements-scroll-wrapper">
+                    {% if badge_categories is defined and badge_categories %}
+                    {% for category, badges in badge_categories.items() %}
+
+                    {# Compute if this category has items visible to the current visitor #}
+                    {% set ns = namespace(has_visible=false) %}
+                    {% for badge in badges %}
+                    {% if is_owner or badge.unlocked %}
+                    {% set ns.has_visible = true %}
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if ns.has_visible %}
+                    <div class="achievement-category-group">
+                        <h4 class="category-group-title" style="color: #fff; margin-top: 15px;">{{ category }}</h4>
+                        <div class="achievements-horizontal-row" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            {% for badge in badges %}
+                            {% if is_owner or badge.unlocked %}
+                            <div class="achievement-node-card {% if not badge.unlocked %}locked-state-node{% endif %}"
+                                id="badge-node-{{ badge.id }}"
+                                style="padding: 10px; border: 1px solid #333; background: rgba(255,255,255,0.05); border-radius: 8px; cursor: pointer;"
+                                data-badge-name="{{ badge.name }}" data-badge-desc="{{ badge.description }}"
+                                data-badge-id="{{ badge.id }}" data-badge-unlocked="{{ badge.unlocked }}"
+                                data-badge-time="{{ badge.unlocked_at or '' }}" onclick="handleBadgeClick(this)">
+
+                                <span class="badge-node-name-label" style="display:block; font-weight:bold;">{{
+                                    badge.name }}</span>
+                                <small style="color: #aaa; display: block; margin-bottom: 5px;">{{ badge.description
+                                    }}</small>
+
+                                {% if badge.unlocked %}
+                                <span style="display:block; color: #4ADE80; font-size: 11px;">Unlocked ✓</span>
+                                {% else %}
+                                <span style="display:block; color: #EF4444; font-size: 11px;">Locked 🔒</span>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    {% else %}
+                    <p class="text-muted" style="padding: 1rem; text-align: center;">No achievements data available.</p>
+                    {% endif %}
+                </div>
+
+
+            </div>
         </section>
-        {% if is_owner %}
-        <div class="logout">
-            <a href="{{url_for('auth.signout')}}">Sign out</a>
-        </div>
-        {% endif %}
+
     </main>
 </div>
+
+{% if is_owner %}
+<div class="signout">Sign out</div>
+{% endif %}
+
+<div class="warning">
+    // WARNING: SIGNOUT_REQUEST
+    <p style="margin: 0; padding-bottom: 4px;">Are you sure you want to sign out?</p>
+    <div>
+        <div><a href="{{url_for('auth.signout')}}">Yes</a></div>
+        <div class="no">No</a></div>
+    </div>
+</div>
+
+<script>
+    function toggleInfo(id) {
+        const box = document.getElementById(id);
+        box.style.display = (box.style.display === "block") ? "none" : "block";
+    }
+
+    function revealAchievementShowcaseDetails(name, description, id, isUnlocked, unlockedAt) {
+        const panel = document.getElementById('achievement-details-panel');
+        const title = document.getElementById('panel-title');
+        const desc = document.getElementById('panel-desc');
+        const statusPill = document.getElementById('panel-status-pill');
+        const timeLabel = document.getElementById('panel-timestamp');
+        const shareBtn = document.getElementById('panel-share-btn');
+
+        title.innerText = name;
+        desc.innerText = description;
+
+        if (isUnlocked === 'True' || isUnlocked === true) {
+            statusPill.innerText = "Unlocked";
+            statusPill.className = "status-pill unlocked";
+            if (unlockedAt && unlockedAt !== 'None' && unlockedAt !== '') {
+                const parsedDate = new Date(unlockedAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+                timeLabel.innerText = `Earned on ${parsedDate}`;
+            } else {
+                timeLabel.innerText = "";
+            }
+        } else {
+            statusPill.innerText = "Locked";
+            statusPill.className = "status-pill locked";
+            timeLabel.innerText = "";
+        }
+
+        panel.style.display = "block";
+
+        shareBtn.onclick = function () {
+            const generatedCleanPath = window.location.origin + window.location.pathname;
+            const compiledQueryShareLink = `${generatedCleanPath}?achieve=${id}`;
+
+            navigator.clipboard.writeText(compiledQueryShareLink).then(() => {
+                const initialTextValue = shareBtn.innerHTML;
+                shareBtn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Link Copied!`;
+                setTimeout(() => { shareBtn.innerHTML = initialTextValue; }, 2500);
+            }).catch(err => {
+                console.error('Failed copying URL reference node onto clipboard context: ', err);
+            });
+        };
+    }
+
+    function handleBadgeClick(element) {
+        const name = element.getAttribute('data-badge-name');
+        const desc = element.getAttribute('data-badge-desc');
+        const id = element.getAttribute('data-badge-id');
+        const unlocked = element.getAttribute('data-badge-unlocked');
+        const time = element.getAttribute('data-badge-time');
+
+        // Securely routes strings directly into your modal panel drawer logic
+        revealAchievementShowcaseDetails(name, desc, id, unlocked, time);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const URLQueryParamHandler = new URLSearchParams(window.location.search);
+        const targetBadgeParamID = URLQueryParamHandler.get('achieve');
+
+        if (targetBadgeParamID) {
+            const visualCardTargetNode = document.getElementById(`badge-node-${targetBadgeParamID}`);
+            if (visualCardTargetNode) {
+                visualCardTargetNode.classList.add('shared-badge-highlight');
+                visualCardTargetNode.click();
+                visualCardTargetNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+    });
+
+    const signout = document.querySelector('.signout')
+    const warning = document.querySelector('.warning')
+    const no = document.querySelector('.no')
+    let signout__not_clicked = true
+    warning.style.display = 'none'
+    signout.addEventListener('click', () => {
+        if (signout__not_clicked) {
+            warning.style.display = 'flex';
+            signout__not_clicked = !signout__not_clicked
+        } else {
+            warning.style.display = 'none';
+            signout__not_clicked = !signout__not_clicked
+        }
+    })
+
+    no.addEventListener('click', () => {
+        warning.style.display = 'none';
+        signout__not_clicked = !signout__not_clicked
+    })
+</script>
+
+{% if is_owner %}
+<script>
+    localStorage.setItem('afflux_remembered_owner', '{{ target_user.username }}');
+</script>
+{% endif %}
+{% if check_guest_ownership %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const rememberedUser = localStorage.getItem('afflux_remembered_owner');
+        const targetUser = "{{ target_user.username }}";
+
+        if (rememberedUser && rememberedUser.toLowerCase() === targetUser.toLowerCase()) {
+            const msgWrapper = document.querySelector('.msg_wrapper');
+            if (msgWrapper) {
+                // 1. Create the toast element
+                const notifyDiv = document.createElement('div');
+                notifyDiv.className = 'notify notify_come';
+                notifyDiv.innerHTML = '<p><i class="fa-solid fa-user-gear"></i> This looks like your profile. Sign in to update your bio, links, or sync achievements.</p>';
+
+                // 2. Inject it into the UI
+                msgWrapper.appendChild(notifyDiv);
+
+                // 3. Match your notify.js timing (e.g., clear after 4-5 seconds)
+                setTimeout(function () {
+                    // Slide out animation class if your CSS uses it
+                    notifyDiv.classList.remove('notify_come');
+                    notifyDiv.classList.add('notify_leave');
+
+                    // Permanently remove from the DOM tree once the exit completes
+                    setTimeout(() => notifyDiv.remove(), 500);
+                }, 4500);
+            }
+        }
+    });
+</script>
+{% endif %}
 {% endblock %}

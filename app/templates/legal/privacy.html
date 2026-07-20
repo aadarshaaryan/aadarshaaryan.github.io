@@ -1,0 +1,91 @@
+{% extends "base/base.html" %}
+
+{% block title %}Privacy Policy | Afflux{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/legal.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="legal-container">
+    <main class="legal-card">
+        <dection class="legal-header">
+            <h1>// PRIVACY POLICY</h1>
+            <p class="legal-meta">Last Updated: July 18, 2026</p>
+        </section>
+
+        <section class="legal-section">
+            <p>Welcome to Afflux. Your privacy is paramount. This Privacy Policy outlines how we handle, process, and
+                protect your information as an MVP platform designed for skill development and verified achievements.
+            </p>
+        </section>
+
+        <section class="legal-section">
+            <h3>1. Information We Collect</h3>
+            <p>To operate our gamified metrics, tracking features, and platform services, we collect:</p>
+            <ul>
+                <li><span class="legal-highlight">Account Credentials:</span> Full name, username, email address, and
+                    encrypted password strings.</li>
+                <li><span class="legal-highlight">Profile Information:</span> Biography details and linked social media
+                    accounts (GitHub, LinkedIn, Website, Instagram, YouTube) that you voluntarily add.</li>
+                <li><span class="legal-highlight">Gamification & System Data:</span> Earned experience points (XP),
+                    Level progression metrics, login history (including 7th and 30th milestones), and leaderboard
+                    rankings.</li>
+                <li><span class="legal-highlight">Event Logs:</span> Comprehensive event results, display names for
+                    participation, and system records of issued certificate codes.</li>
+            </ul>
+        </section>
+
+        <section class="legal-section">
+            <h3>2. How We Process Data</h3>
+            <p>Your records are processed securely to execute core platform features, including:</p>
+            <ul>
+                <li>Managing dynamic profile views and processing administrative profile adjustments.</li>
+                <li>Calculating correct platform-wide Leaderboard placements.</li>
+                <li>Issuing verifiable digital certificates matching your custom input display name.</li>
+                <li>Awarding automated XP incentives (e.g., the 500 XP profile completion bonus or daily sign-in
+                    milestones).</li>
+            </ul>
+        </section>
+
+        <section class="legal-section">
+            <h3>3. Public Transparency Data</h3>
+            <p>To foster healthy competition, specific parameters remain public by default on profiles and leaderboards:
+            </p>
+            <ul>
+                <li>Public identity parameters: Name, username, bio fields, and active social links.</li>
+                <li>Gamification stats: Current Level standing, total XP count, structural badge sets, and relative
+                    leaderboard position.</li>
+            </ul>
+            <p><em>Note: Your raw email addresses, administrative identifiers, and encrypted password entries are never
+                    exposed publicly.</em></p>
+        </section>
+
+        <section class="legal-section">
+            <h3>4. Immutable Certificate Records</h3>
+            <p>Certificates generated via Afflux represent official completion events. To guarantee long-term
+                legitimacy for external checkers, unique certificate codes remain publicly queryable and verifiable,
+                even if an individual modifies their profile name or requests account deletion.</p>
+        </section>
+
+        <section class="legal-section">
+            <h3>5. Security & Framework</h3>
+            <p>We leverage industrial cryptography methods (such as salted hashing via `werkzeug.security`) to prevent
+                raw password exposure. While we match secure framework standard operating models, please
+                recognize that no web platform provides absolute bulletproof transmission protection.</p>
+        </section>
+
+        <section class="legal-section">
+            <h3>6. Core Rights & Inquiries</h3>
+            <p>You preserve the right to edit profile metrics, adjust connected links, or update profile entries
+                directly via your dashboard configuration panel. For specialized queries regarding database
+                deletion configurations, please contact the Afflux administration desk.</p>
+        </section>
+
+        <footer class="legal-footer">
+            <a href="{{ url_for('main.home') }}" class="btn-back"><i class="fa-solid fa-arrow-left"></i> Return to
+                Home</a>
+        </footer>
+    </main>
+</div>
+{% endblock %}
